@@ -67,11 +67,11 @@ export default function IslandMap() {
         <div className="absolute top-16 right-40 text-white text-xl animate-float delay-700">↗</div>
         
         {/* Soleil */}
-        <div className="absolute top-8 right-16 w-16 h-16 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full shadow-lg">
+        <div className="absolute top-8 left-8 w-16 h-16 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full shadow-lg">
           <div className="absolute inset-2 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-full"></div>
           {/* Rayons de soleil */}
           <div className="absolute -inset-4 bg-yellow-200/20 rounded-full animate-pulse"></div>
-              </div>
+        </div>
               
               {/* zavatra tsis dikany */}
         <div className="absolute top-1/2 right-1/4 w-6 h-6 bg-red-400 rounded-full animate-pulse shadow-md">

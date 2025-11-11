@@ -43,8 +43,6 @@ export default function IslandMap() {
             {/* Presqu'île / péninsule */}
             <div className="absolute bottom-5 -right-5 w-1/4 h-1/3 bg-gradient-to-r from-green-400 to-emerald-300 rounded-[70%_30%_60%_40%_/_60%_50%_50%_40%] border-4 border-yellow-200 border-l-0"></div>
             
-            {/* Baie */}
-            <div className="absolute bottom-10 left-5 w-1/5 h-1/4 bg-blue-400 rounded-[40%_60%_30%_70%_/_60%_40%_60%_40%]"></div>
           </div>
 
           {/* Détails de l'île */}
@@ -108,7 +106,7 @@ export default function IslandMap() {
       ))}
 
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white text-lg font-semibold bg-black/30 px-6 py-2 rounded-xl z-10">
-        🌴 Bienvenue sur l'île du savoir !
+        🌴 Bienvenue sur education island !
       </div>
     </div>
   );

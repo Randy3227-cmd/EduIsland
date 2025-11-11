@@ -1,0 +1,111 @@
+Critère d'évaluation : 
+    aspect technique : design(à la page am design hita amzao)
+    projet pertinent
+    à long terme ve sa à court terme ( à long terme no andrasana ) 
+    pitch vidéo ( démonstration , simulation )
+    15 Novembre avant minuit mandefa projet sy pitch vidéo 5mn
+    22 Novembre remise des prix
+    Heberger l'application (oui), raha application dia misy lien web
+
+    Thème : cultivé demain
+    Sous-thème : 
+    
+
+    info : Nom de l'équipe, 
+    Membre du groupe : nom prénom age, numéro, mail, mentionné le chef d'équipe
+    et préciser hackathon classique
+
+    technologie : react
+
+
+    fonctionalité : 
+    Objectif : Mba ahatonga ny mpianatra mazoto hianatra, tsy forcena hianatra fa mazoto
+                Amzay ts mianatra tsianjery ny lesona
+    Cible : 
+
+    Matière : 
+        Francais (bas)
+            Dictée
+            Orthographe
+            Grammaire
+        Malagasy (elevé)
+            Tsipelina
+            Soratononina (bas)
+        Matematika (élevé)
+            Geometrie
+            Calcul
+            Arithmétique
+        SVT (élevé)
+            biologie
+            
+        Tantara (bas)
+        Zeografia ()
+
+
+Frontend : React.js + Tailwind CSS Animation : GSAP
+Backend : Supabase
+Hebergement : vercel
+
+Ta stack technique est solide pour un hackathon, mais pour que le projet soit complet et jouable, il te manque :
+
+Gestion complète des utilisateurs / scores
+
+Contenu éducatif (questions, mini-jeux)
+
+Assets graphiques et sonores
+
+Logique du jeu et progression
+
+Tests et optimisation pour mobile/web
+
+
+/EduIsland
+│
+├── public/                  # Assets globaux (images, sons)
+│   ├── images/
+│   ├── sounds/
+│   └── fonts/
+│
+├── src/
+│   ├── components/          # Composants réutilisables
+│   │   ├── VilleCard.jsx
+│   │   ├── MatiereCard.jsx
+│   │   ├── Niveau.jsx
+│   │   └── ExperienceBar.jsx
+│   │
+│   ├── pages/               # Pages React/Next.js
+│   │   ├── index.jsx        # Carte de l’île
+│   │   ├── ville/           # Sous-dossiers par ville
+│   │   │   ├── ville1.jsx   # P1
+│   │   │   ├── ville2.jsx   # P1
+│   │   │   ├── ville3.jsx   # P2
+│   │   │   ├── ville4.jsx   # P2
+│   │   │   └── ville5.jsx   # P3
+│   │   └── matiere/         # Pages spécifiques aux matières/niveaux
+│   │       ├── orthographe.jsx
+│   │       ├── vocabulaire.jsx
+│   │       ├── nombre.jsx
+│   │       └── ...          # Les autres matières
+│   │
+│   ├── services/            # Connexion Supabase et API
+│   │   ├── supabaseClient.js
+│   │   └── gameAPI.js
+│   │
+│   ├── animations/          # Animations GSAP
+│   │   └── gsapAnimations.js
+│   │
+│   └── utils/               # Fonctions utilitaires (XP, débloquage)
+│       └── helpers.js
+│
+├── supabase/                # Edge Functions et SQL
+│   ├── functions/
+│   │   ├── updateXP.js
+│   │   └── fetchNiveaux.js
+│   └── sql/
+│       └── init.sql
+│
+├── .env.local               # Variables d'environnement Supabase
+├── package.json
+└── tailwind.config.js
+
+

@@ -8,6 +8,7 @@ npx tailwindcss init -p
 
 
 npm install gsap @supabase/supabase-js react-router-dom
+npm install framer-motion
 
 @REM mandefa ny projet
 npm start

@@ -25,14 +25,12 @@ export default function UserProfile({ userId }) {
 
   return (
     <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4 bg-pink-100/80 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-xl border-2 border-pink-300 animate-bounce">
-      {/* Avatar */}
       <img
         src={user.image || "/default-avatar.png"}
         alt={user.name}
         className="w-14 h-14 rounded-full border-4 border-yellow-300 shadow-lg object-cover"
       />
 
-      {/* Nom et XP */}
       <div className="flex flex-col">
         <span className="font-bold text-xl text-purple-700 drop-shadow-md">{user.name}</span>
         <span className="text-base text-orange-500 font-semibold">XP : {user.xp_total}</span>

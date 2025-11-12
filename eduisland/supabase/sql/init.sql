@@ -7,7 +7,9 @@ CREATE TABLE users (
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     xp_total INTEGER DEFAULT 0,
-    created_at TIMESTAMP DEFAULT NOW()
+    created_at TIMESTAMP DEFAULT NOW(),
+    passowrd varchar(250),
+    image varchar(500)
 );
 
 -- -------------------------------

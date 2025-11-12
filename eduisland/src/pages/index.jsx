@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "../services/supabaseClient";
 import CityMarker from "../components/CityMarker";
+import UserProfile from "../components/UserProfil";
 
 export default function IslandMap() {
   const [villes, setVilles] = useState([]);
@@ -25,8 +26,8 @@ export default function IslandMap() {
 
   return (
     <div className="relative w-full h-screen bg-gradient-to-b from-sky-200 via-sky-300 to-sky-400 overflow-hidden font-[Poppins]">
+      <UserProfile userId={"a1e6874a-bebe-46d6-949c-c0ce5df3b9ae"} />
 
-     {/* 🌞 Soleil étincelant */}
 <motion.div
   animate={{
     rotate: [0, 10, -10, 0],
@@ -79,7 +80,6 @@ export default function IslandMap() {
       {[
         { top: "10%", left: "10%" },
         { top: "15%", right: "20%" },
-        { top: "5%", right: "50%" },
       ].map((pos, i) => (
         <motion.div
           key={i}

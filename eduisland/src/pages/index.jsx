@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { supabase } from "../services/supabaseClient";
 import CityMarker from "../components/CityMarker";
 import UserProfile from "../components/UserProfil";
+import { useNavigate } from "react-router-dom";
 
 export default function IslandMap() {
   const [villes, setVilles] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchVilles = async () => {
@@ -317,7 +319,7 @@ export default function IslandMap() {
             name={ville.name}
             xp={ville.xp_required}
             position={positions[index % positions.length]}
-            onClick={() => alert(`🌆 Bienvenue à ${ville.name} !`)}
+            onClick={() => navigate(`/ville/${ville.id}`)}
           />
         </motion.div>
       ))}

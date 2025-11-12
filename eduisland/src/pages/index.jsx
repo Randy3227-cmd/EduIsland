@@ -4,6 +4,8 @@ import { supabase } from "../services/supabaseClient";
 import CityMarker from "../components/CityMarker";
 import UserProfile from "../components/UserProfil";
 import { useNavigate } from "react-router-dom";
+import Sun from "../components/Sun";
+import Clouds from "../components/Clouds";
 
 export default function IslandMap() {
   const [villes, setVilles] = useState([]);
@@ -29,71 +31,9 @@ export default function IslandMap() {
   return (
     <div className="relative w-full h-screen bg-gradient-to-b from-sky-200 via-sky-300 to-sky-400 overflow-hidden font-[Poppins]">
       <UserProfile userId={"a1e6874a-bebe-46d6-949c-c0ce5df3b9ae"} />
+      <Sun />
 
-<motion.div
-  animate={{
-    rotate: [0, 10, -10, 0],
-    scale: [1, 1.05, 1],
-    boxShadow: [
-      "0 0 20px 5px rgba(255, 230, 150, 0.6)",
-      "0 0 40px 15px rgba(255, 200, 80, 0.8)",
-      "0 0 25px 10px rgba(255, 230, 150, 0.6)",
-    ],
-  }}
-  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-  className="absolute top-6 left-10 w-28 h-28 bg-gradient-to-br from-yellow-300 via-yellow-400 to-orange-400 rounded-full shadow-2xl"
->
-  {/* Cœur du soleil */}
-  <motion.div
-    animate={{
-      scale: [1, 1.2, 1],
-      opacity: [0.9, 1, 0.8],
-    }}
-    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-    className="absolute inset-4 bg-yellow-100 rounded-full blur-md"
-  ></motion.div>
-
-  {/* Rayons lumineux étincelants */}
-  {Array.from({ length: 12 }).map((_, i) => (
-    <motion.div
-      key={i}
-      className="absolute w-3 h-8 bg-yellow-300 rounded-full opacity-70 origin-bottom"
-      style={{
-        top: "50%",
-        left: "50%",
-        transform: `rotate(${i * 30}deg) translateY(-60%)`,
-      }}
-      animate={{
-        scaleY: [1, 1.5, 1],
-        opacity: [0.7, 1, 0.7],
-      }}
-      transition={{
-        duration: 3 + (i % 3),
-        repeat: Infinity,
-        delay: i * 0.2,
-      }}
-    ></motion.div>
-  ))}
-</motion.div>
-
-
-
-      {/* ☁️ Nuages flottants */}
-      {[
-        { top: "10%", left: "10%" },
-        { top: "15%", right: "20%" },
-      ].map((pos, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-24 h-12 bg-white rounded-full opacity-90 shadow"
-          style={pos}
-          animate={{ x: [0, i % 2 === 0 ? 40 : -40, 0] }}
-          transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div className="absolute -left-3 top-2 w-10 h-10 bg-white rounded-full"></div>
-          <div className="absolute -right-3 top-2 w-10 h-10 bg-white rounded-full"></div>
-        </motion.div>
-      ))}
+      <Clouds />
 
       {/* 🌴 Grande île */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[90%] h-[70%]">

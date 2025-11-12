@@ -1,4 +1,3 @@
-// src/components/UserProfile.jsx
 import React, { useEffect, useState } from "react";
 import { supabase } from "../services/supabaseClient";
 

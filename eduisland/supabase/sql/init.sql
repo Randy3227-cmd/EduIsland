@@ -52,6 +52,11 @@ CREATE TABLE scores (
     completed_at TIMESTAMP DEFAULT NOW()
 );
 
+CREATE TABLE niveau_types (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,  -- nom du type, ex: "qcm", "carte_remplir"
+    description TEXT             -- optionnel, pour expliquer ce type
+);
 -- -------------------------------
 -- 6️⃣ Exemples d'insertion de données
 -- -------------------------------

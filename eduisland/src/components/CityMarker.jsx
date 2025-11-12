@@ -14,7 +14,7 @@ export default function CityMarker({ name, xp, position, onClick }) {
       <div className="w-10 h-10 bg-yellow-400 rounded-full border-4 border-white shadow-lg group-hover:scale-110 transition" />
       <p className="text-xs mt-1 font-semibold text-white drop-shadow">
         {name} <br />
-        <span className="text-[10px] text-gray-200">{xp} XP</span>
+        <span className="text-[10px] text-black-200">{xp} XP</span>
       </p>
     </motion.div>
   );

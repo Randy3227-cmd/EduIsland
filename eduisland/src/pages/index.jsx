@@ -1,5 +1,5 @@
-// src/components/IslandMap.jsx
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { supabase } from "../services/supabaseClient";
 import CityMarker from "../components/CityMarker";
 
@@ -15,99 +15,322 @@ export default function IslandMap() {
     fetchVilles();
   }, []);
 
-  // positions fictives (tu pourras plus tard les stocker en base)
   const positions = [
     { top: "40%", left: "35%" },
     { top: "55%", left: "45%" },
     { top: "35%", left: "70%" },
+    { top: "50%", left: "60%" },
+    { top: "80%", left: "30%" }
   ];
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-b from-sky-300 to-blue-300 overflow-hidden">
-      {/* Fond avec des éléments enfantins */}
-      <div className="absolute inset-0 w-full h-full">
-        {/* Océan */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-400 to-blue-500">
-          {/* Vagues décoratives */}
-          <div className="absolute bottom-0 w-full h-8 bg-blue-500 rounded-t-full"></div>
-          <div className="absolute bottom-4 w-full h-6 bg-blue-400 rounded-t-full opacity-70"></div>
-        </div>
-        
-        {/* Île principale - forme libre et organique */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-4/5 h-3/5">
-          {/* Forme principale de l'île */}
-          <div className="relative w-full h-full">
-            {/* Corps principal de l'île */}
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-300 to-green-400 rounded-[60%_40%_70%_30%_/_50%_60%_40%_50%] shadow-lg border-4 border-yellow-200"></div>
-            
-            {/* Presqu'île / péninsule */}
-            <div className="absolute bottom-5 -right-5 w-1/4 h-1/3 bg-gradient-to-r from-green-400 to-emerald-300 rounded-[70%_30%_60%_40%_/_60%_50%_50%_40%] border-4 border-yellow-200 border-l-0"></div>
-            
-          </div>
+    <div className="relative w-full h-screen bg-gradient-to-b from-sky-200 via-sky-300 to-sky-400 overflow-hidden font-[Poppins]">
 
-          {/* Détails de l'île */}
-          {/* Lac au centre */}
-          <div className="absolute top-1/3 left-1/3 w-16 h-12 bg-blue-300 rounded-[50%_40%_60%_50%_/_60%_50%_50%_40%] shadow-inner"></div>
-          
-          {/* Collines */}
-          <div className="absolute top-1/4 right-1/4 w-20 h-16 bg-green-500 rounded-[60%_40%_50%_50%_/_50%_60%_40%_50%] shadow-md"></div>
-          {/* <div className="absolute top-2/3 left-1/5 w-14 h-12 bg-green-400 rounded-[40%_60%_50%_50%_/_50%_50%_50%_50%] shadow-md"></div> */}
-          
-          {/* Plages de sable */}
-          <div className="absolute bottom-5 left-1/4 w-1/4 h-8 bg-yellow-200 rounded-[50%_50%_40%_60%_/_60%_70%_30%_40%]"></div>
-          <div className="absolute bottom-8 right-1/3 w-1/5 h-6 bg-yellow-200 rounded-[60%_40%_50%_50%_/_50%_60%_40%_50%]"></div>
-          
-          {/* Rochers */}
-        </div>
-        
-               <div className="absolute top-20 left-32 text-white text-xl animate-float">↗</div>
-        <div className="absolute top-24 left-28 text-white text-xl animate-float delay-300">↗</div>
-        <div className="absolute top-16 right-40 text-white text-xl animate-float delay-700">↗</div>
-        
-        {/* Soleil */}
-        <div className="absolute top-8 left-8 w-16 h-16 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full shadow-lg">
-          <div className="absolute inset-2 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-full"></div>
-          {/* Rayons de soleil */}
-          <div className="absolute -inset-4 bg-yellow-200/20 rounded-full animate-pulse"></div>
-        </div>
-              
-              {/* zavatra tsis dikany */}
-        <div className="absolute top-1/2 right-1/4 w-6 h-6 bg-red-400 rounded-full animate-pulse shadow-md">
-          <div className="absolute inset-1 bg-red-300 rounded-full"></div>
-        </div>
-        <div className="absolute top-2/3 left-1/4 w-10 h-10 bg-purple-400 rounded-full animate-bounce shadow-md delay-1000">
-          <div className="absolute inset-1 bg-purple-300 rounded-full"></div>
-        </div>
-        
-        {/* Nuages */}
-        <div className="absolute top-10 left-20 w-16 h-8 bg-white rounded-full opacity-80 animate-float">
-          <div className="absolute -left-2 top-1 w-6 h-6 bg-white rounded-full"></div>
-          <div className="absolute -right-2 top-1 w-6 h-6 bg-white rounded-full"></div>
-        </div>
-        <div className="absolute top-20 right-32 w-20 h-10 bg-white rounded-full opacity-80 animate-float delay-1000">
-          <div className="absolute -left-3 top-2 w-8 h-8 bg-white rounded-full"></div>
-          <div className="absolute -right-3 top-2 w-8 h-8 bg-white rounded-full"></div>
-        </div>
-        <div className="absolute top-5 right-80 w-20 h-10 bg-white rounded-full opacity-80 animate-float delay-1000">
-          <div className="absolute -left-3 top-2 w-8 h-8 bg-white rounded-full"></div>
-          <div className="absolute -right-3 top-2 w-8 h-8 bg-white rounded-full"></div>
-        </div>
-      </div>
+     {/* 🌞 Soleil étincelant */}
+<motion.div
+  animate={{
+    rotate: [0, 10, -10, 0],
+    scale: [1, 1.05, 1],
+    boxShadow: [
+      "0 0 20px 5px rgba(255, 230, 150, 0.6)",
+      "0 0 40px 15px rgba(255, 200, 80, 0.8)",
+      "0 0 25px 10px rgba(255, 230, 150, 0.6)",
+    ],
+  }}
+  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+  className="absolute top-6 left-10 w-28 h-28 bg-gradient-to-br from-yellow-300 via-yellow-400 to-orange-400 rounded-full shadow-2xl"
+>
+  {/* Cœur du soleil */}
+  <motion.div
+    animate={{
+      scale: [1, 1.2, 1],
+      opacity: [0.9, 1, 0.8],
+    }}
+    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+    className="absolute inset-4 bg-yellow-100 rounded-full blur-md"
+  ></motion.div>
 
-        
-      {villes.map((ville, index) => (
-        <CityMarker
-          key={ville.id}
-          name={ville.name}
-          xp={ville.xp_required}
-          position={positions[index % positions.length]}
-          onClick={() => alert(`Tu entres dans ${ville.name} !`)}
-        />
+  {/* Rayons lumineux étincelants */}
+  {Array.from({ length: 12 }).map((_, i) => (
+    <motion.div
+      key={i}
+      className="absolute w-3 h-8 bg-yellow-300 rounded-full opacity-70 origin-bottom"
+      style={{
+        top: "50%",
+        left: "50%",
+        transform: `rotate(${i * 30}deg) translateY(-60%)`,
+      }}
+      animate={{
+        scaleY: [1, 1.5, 1],
+        opacity: [0.7, 1, 0.7],
+      }}
+      transition={{
+        duration: 3 + (i % 3),
+        repeat: Infinity,
+        delay: i * 0.2,
+      }}
+    ></motion.div>
+  ))}
+</motion.div>
+
+
+
+      {/* ☁️ Nuages flottants */}
+      {[
+        { top: "10%", left: "10%" },
+        { top: "15%", right: "20%" },
+        { top: "5%", right: "50%" },
+      ].map((pos, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-24 h-12 bg-white rounded-full opacity-90 shadow"
+          style={pos}
+          animate={{ x: [0, i % 2 === 0 ? 40 : -40, 0] }}
+          transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="absolute -left-3 top-2 w-10 h-10 bg-white rounded-full"></div>
+          <div className="absolute -right-3 top-2 w-10 h-10 bg-white rounded-full"></div>
+        </motion.div>
       ))}
 
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white text-lg font-semibold bg-black/30 px-6 py-2 rounded-xl z-10">
-        🌴 Bienvenue sur education island !
+      {/* 🌴 Grande île */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[90%] h-[70%]">
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-200 to-green-400 rounded-[60%_40%_70%_30%_/_50%_60%_40%_50%] shadow-2xl border-4 border-yellow-100"></div>
+
+        {/* 🌾 Plages */}
+        <div className="absolute bottom-8 left-1/4 w-1/3 h-12 bg-yellow-200 rounded-[50%_50%_40%_60%_/_60%_70%_30%_40%] shadow-inner"></div>
+        <div className="absolute bottom-10 right-1/3 w-1/4 h-10 bg-yellow-200 rounded-[60%_40%_50%_50%_/_50%_60%_40%_50%] shadow-inner"></div>
+
+        {/* 🌋 Colline volcanique */}
+       
+
+        {/* 💧 Lac */}
+        <motion.div
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 6, repeat: Infinity }}
+          className="absolute top-1/3 left-1/3 w-24 h-16 bg-blue-300 rounded-[50%_40%_60%_50%_/_60%_50%_50%_40%] shadow-inner border border-blue-200"
+        ></motion.div>
       </div>
+
+      {/* ⛵ Bateau */}
+      <motion.div
+        className="absolute bottom-20 left-10 text-3xl"
+        animate={{ x: [0, 60, 0], y: [0, -5, 0] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      >
+        ⛵
+      </motion.div>
+
+      {/* 🐠 Poissons */}
+      <motion.div
+        className="absolute bottom-32 right-8 text-2xl"
+        animate={{ x: [0, -60, 0] }}
+        transition={{ duration: 10, repeat: Infinity }}
+      >
+        🐠
+      </motion.div>
+      <motion.div
+        className="absolute bottom-28 right-32 text-xl"
+        animate={{ x: [0, -80, 0], y: [0, -5, 0] }}
+        transition={{ duration: 12, repeat: Infinity }}
+      >
+        🐟
+      </motion.div>
+
+      {/* 🦋 Papillons */}
+      <motion.div
+        className="absolute top-60 right-1/3 text-pink-400 text-xl"
+        animate={{ y: [0, -10, 0], rotate: [0, 10, -10, 0] }}
+        transition={{ duration: 5, repeat: Infinity }}
+      >
+        🦋
+      </motion.div>
+
+            {/* 🌸 Fleurs tropicales dynamiques */}
+      {Array.from({ length: 10 }).map((_, i) => {
+        // Position et propriétés aléatoires
+        const randomLeft = Math.random() * 80 + 10; // entre 10% et 90%
+        const randomBottom = Math.random() * 40 + 10; // entre 10% et 50%
+        const emojis = ["🌸", "🌺", "🌼", "🌻", "🌷", "💮"];
+        const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        const randomSize = Math.random() * 1.5 + 0.8; // taille 0.8x à 2.3x
+        const randomDelay = Math.random() * 2;
+        const randomRotation = Math.random() * 10;
+
+        return (
+          <motion.div
+            key={`flower-${i}`}
+            className="absolute text-2xl"
+            style={{
+              left: `${randomLeft}%`,
+              bottom: `${randomBottom}%`,
+              transform: `scale(${randomSize}) rotate(${randomRotation}deg)`,
+            }}
+            animate={{
+              scale: [1, 1.3, 1],
+              rotate: [0, 5, -5, 0],
+              opacity: [0.8, 1, 0.9],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: randomDelay,
+            }}
+          >
+            {emoji}
+          </motion.div>
+        );
+      })}
+
+
+      {/* 🐢 Animaux mignons sur l'île */}
+      <motion.div
+        className="absolute bottom-36 left-1/4 text-2xl"
+        animate={{ x: [0, 30, 0], rotate: [0, 10, 0] }}
+        transition={{ duration: 15, repeat: Infinity }}
+      >
+        🐢
+      </motion.div>
+      <motion.div
+        className="absolute bottom-40 right-1/3 text-xl"
+        animate={{ y: [0, -5, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        🦜
+      </motion.div>
+      <motion.div
+        className="absolute bottom-44 left-1/2 text-xl"
+        animate={{ x: [0, -20, 0] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      >
+        🐿️
+      </motion.div>
+
+
+      {/* ⭐ Étoiles scintillantes */}
+      {[
+        { top: "8%", left: "30%", delay: 0 },
+        { top: "12%", right: "15%", delay: 0.5 },
+        { top: "6%", left: "60%", delay: 1 },
+      ].map((star, i) => (
+        <motion.div
+          key={`star-${i}`}
+          className="absolute text-yellow-300 text-xl"
+          style={{ top: star.top, left: star.left, right: star.right }}
+          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity, delay: star.delay }}
+        >
+          ⭐
+        </motion.div>
+      ))}
+
+      {/* 🦩 Flamants roses */}
+      <motion.div
+        className="absolute bottom-24 left-1/3 text-2xl"
+        animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
+        transition={{ duration: 4, repeat: Infinity }}
+      >
+        🦩
+      </motion.div>
+
+      {/* 🐚 Coquillages sur la plage */}
+      {[
+        { bottom: "16%", left: "28%" },
+        { bottom: "18%", left: "35%" },
+        { bottom: "17%", right: "30%" },
+      ].map((shell, i) => (
+        <motion.div
+          key={`shell-${i}`}
+          className="absolute text-pink-300 text-lg"
+          style={shell}
+          animate={{ rotate: [0, 10, -10, 0] }}
+          transition={{ duration: 5, repeat: Infinity, delay: i * 0.3 }}
+        >
+          🐚
+        </motion.div>
+      ))}
+{/* 🌴 Forêt de palmiers dynamiques */}
+{Array.from({ length: 20 }).map((_, i) => {
+  const randomLeft = Math.random() * 80 + 10; // entre 10% et 90%
+  const randomBottom = Math.random() * 40 + 10; // entre 10% et 50%
+  const randomSize = Math.random() * 2 + 1; // entre 1x et 3x
+  const randomDelay = Math.random() * 4; // pour décaler les animations
+  return (
+    <motion.div
+      key={`palm-${i}`}
+      className="absolute"
+      style={{
+        left: `${randomLeft}%`,
+        bottom: `${randomBottom}%`,
+        transform: `scale(${randomSize})`,
+      }}
+      animate={{ rotate: [0, 3, -3, 0] }}
+      transition={{ duration: 5, repeat: Infinity, delay: randomDelay }}
+    >
+      <div className="text-5xl drop-shadow-[0_3px_2px_rgba(0,0,0,0.3)]">
+        🌴
+      </div>
+    </motion.div>
+  );
+})}
+
+
+      {/* 🦀 Crabe qui se promène */}
+      <motion.div
+        className="absolute bottom-20 right-20 text-2xl"
+        animate={{ x: [0, -40, -80, -40, 0] }}
+        transition={{ duration: 20, repeat: Infinity }}
+      >
+        🦀
+      </motion.div>
+
+      {/* 🌊 Vagues animées */}
+      {[0, 1, 2].map((i) => (
+        <motion.div
+          key={`wave-${i}`}
+          className="absolute bottom-12 w-full h-8 bg-blue-300/30 rounded-full"
+          style={{ left: `${i * 10}%` }}
+          animate={{ x: [0, 100, 0], scaleX: [1, 1.1, 1] }}
+          transition={{ duration: 8 + i, repeat: Infinity, delay: i * 0.5 }}
+        ></motion.div>
+      ))}
+
+      {/* ☀️ Rayons de soleil */}
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+        <motion.div
+          key={`ray-${i}`}
+          className="absolute top-16 left-20 w-1 h-12 bg-yellow-200/60 origin-bottom"
+          style={{ transform: `rotate(${angle}deg)` }}
+          animate={{ opacity: [0.3, 0.8, 0.3], scaleY: [1, 1.2, 1] }}
+          transition={{ duration: 3, repeat: Infinity, delay: i * 0.1 }}
+        ></motion.div>
+      ))}
+
+      {/* 🏙️ Villes interactives */}
+      {villes.map((ville, index) => (
+        <motion.div
+          key={ville.id}
+          animate={{ scale: 1 }}
+          transition={{ delay: index * 0.3, type: "spring", stiffness: 120 }}
+        >
+          <CityMarker
+            name={ville.name}
+            xp={ville.xp_required}
+            position={positions[index % positions.length]}
+            onClick={() => alert(`🌆 Bienvenue à ${ville.name} !`)}
+          />
+        </motion.div>
+      ))}
+
+      {/* 🎉 Message d’accueil */}
+      <motion.div
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-xl font-bold bg-sky-700/40 px-8 py-3 rounded-2xl backdrop-blur-md shadow-lg border border-white/20"
+      >
+        🌴 Bienvenue sur <span className="text-yellow-200">Education Island</span> !
+      </motion.div>
     </div>
   );
 }

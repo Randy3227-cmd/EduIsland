@@ -56,27 +56,40 @@ CREATE TABLE scores (
 
 -- Villes
 INSERT INTO villes (name, xp_required) VALUES
-('Première Ville', 0),
-('Deuxième Ville', 50),
-('Troisième Ville', 125);
+('Île des Mots Doux', 0),
+('Baie des Savants', 50),
+('Cité des Savoirs', 125),
+('Volcan de la Connaissance', 250),
 
--- Matières pour Première Ville
+-- Matières pour Île des Mots Doux
 INSERT INTO matieres (ville_id, name) VALUES
-(1, 'Orthographe'),
-(1, 'Nombre'),
-(1, 'Vocabulaire');
+(4, 'Orthographe'),
+(4, 'Nombre'),
+(4, 'Vocabulaire');
 
--- Matières pour Deuxième Ville
+-- Matières pour Baie des Savants
 INSERT INTO matieres (ville_id, name) VALUES
-(2, 'Grammaire'),
-(2, 'Géométrie'),
-(2, 'Science de la vie');
+(5, 'Grammaire'),
+(5, 'Géométrie'),
+(5, 'Science de la vie');
 
--- Matières pour Troisième Ville
+-- Matières pour Cité des Savoirs
 INSERT INTO matieres (ville_id, name) VALUES
-(3, 'Histoire'),
-(3, 'Géographie'),
-(3, 'Informatique');
+(6, 'Histoire'),
+(6, 'Géographie'),
+(6, 'Science de la terre');
+
+-- Matières pour Volcan de la Connaissance
+INSERT INTO matieres (ville_id, name) VALUES
+(7, 'Physique'),
+(7, 'Chimie'),
+(7, 'Problème');
+
+INSERT INTO villes (name, xp_required) VALUES
+('Sunny English Bay', 0);
+INSERT INTO matieres (ville_id, name) VALUES
+(8, 'Anglais');
+
 
 -- Exemples de niveaux pour Orthographe (matiere_id = 1)
 INSERT INTO niveaux (matiere_id, level_number, xp_reward, content) VALUES

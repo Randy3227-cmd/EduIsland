@@ -24,7 +24,9 @@ export default function UserProfile({ userId }) {
   if (!user) return null;
 
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4 bg-pink-100/80 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-xl border-2 border-pink-300 animate-bounce">
+    <div className="fixed top-4 right-4 flex items-center gap-4 
+                    bg-pink-100/90 backdrop-blur-sm rounded-2xl px-5 py-3 
+                    shadow-xl border-2 border-pink-300 animate-bounce z-50">
       <img
         src={user.image || "/default-avatar.png"}
         alt={user.name}

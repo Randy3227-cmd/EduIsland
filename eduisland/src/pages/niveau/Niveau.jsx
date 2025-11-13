@@ -3,9 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../services/supabaseClient";
 
 // Import des composants (tu ne m'as pas demandé de les créer)
-import QCM from "../../components/QCM";
-import Carte from "../../components/Carte";
-import Texte from "../../components/Texte";
+import QCM from "../../components/QCMNiveau";
+// import Carte from "../../components/Carte";
+import Texte from "../../components/TexteACompleter";
 
 export default function Niveau({ userId }) {
   const { id } = useParams(); // niveauId
@@ -50,7 +50,7 @@ export default function Niveau({ userId }) {
 
       {/* Appel des composants selon le type */}
       {niveau.type === "QCM" && <QCM niveauId={niveau.id} userId={userId} />}
-      {niveau.type === "carte" && <Carte niveauId={niveau.id} userId={userId} />}
+      {/* {niveau.type === "carte" && <Carte niveauId={niveau.id} userId={userId} />} */}
       {niveau.type === "texte" && <Texte niveauId={niveau.id} userId={userId} />}
 
       <button

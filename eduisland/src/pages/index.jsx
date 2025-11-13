@@ -7,10 +7,16 @@ import { useNavigate } from "react-router-dom";
 import Sun from "../components/Sun";
 import Clouds from "../components/Clouds";
 
+/* 🏝️ Modern Futuristic Island Map - Main Page
+ * Features: Vibrant gradients, 3D island, tropical decorations, smooth animations
+ * Preserves all original data fetching and navigation logic
+ */
 export default function IslandMap() {
+  // ✅ Original state and navigation logic preserved
   const [villes, setVilles] = useState([]);
   const navigate = useNavigate();
 
+  // ✅ Original data fetching logic preserved
   useEffect(() => {
     const fetchVilles = async () => {
       const { data, error } = await supabase.from("villes").select("*");
@@ -20,6 +26,7 @@ export default function IslandMap() {
     fetchVilles();
   }, []);
 
+  // ✅ Original city positions preserved
   const positions = [
     { top: "40%", left: "35%" },
     { top: "55%", left: "45%" },
@@ -29,231 +36,516 @@ export default function IslandMap() {
   ];
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-b from-sky-200 via-sky-300 to-sky-400 overflow-hidden font-[Poppins]">
-      <UserProfile userId={"a1e6874a-bebe-46d6-949c-c0ce5df3b9ae"} />
+    <div className="relative w-full min-h-screen overflow-hidden font-['Fredoka']">
+      {/* 🌅 Enhanced animated gradient background */}
+      <motion.div
+        animate={{
+          backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+        }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-0 bg-gradient-to-br from-cyan-300 via-blue-400 to-purple-500
+                   bg-[length:200%_200%]"
+      />
+
+      {/* 🌊 Animated ocean waves overlay */}
+      <motion.div
+        animate={{
+          backgroundPosition: ["0px 0px", "1000px 0px"],
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: `repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 50px,
+            rgba(255, 255, 255, 0.1) 50px,
+            rgba(255, 255, 255, 0.1) 100px
+          )`,
+        }}
+      />
+
+      {/* ☀️ Sun component */}
       <Sun />
 
+      {/* ☁️ Clouds component */}
       <Clouds />
 
-      {/* 🌴 Grande île */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[90%] h-[70%]">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-200 to-green-400 rounded-[60%_40%_70%_30%_/_50%_60%_40%_50%] shadow-2xl border-4 border-yellow-100"></div>
+      {/* 👤 User profile */}
+      <UserProfile userId={"a1e6874a-bebe-46d6-949c-c0ce5df3b9ae"} />
 
-        {/* 🌾 Plages */}
-        <div className="absolute bottom-8 left-1/4 w-1/3 h-12 bg-yellow-200 rounded-[50%_50%_40%_60%_/_60%_70%_30%_40%] shadow-inner"></div>
-        <div className="absolute bottom-10 right-1/3 w-1/4 h-10 bg-yellow-200 rounded-[60%_40%_50%_50%_/_50%_60%_40%_50%] shadow-inner"></div>
-
-        {/* 🌋 Colline volcanique */}
-       
-
-        {/* 💧 Lac */}
+      {/* �️ Enhanced Main Island with 3D depth and vibrant colors */}
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0, y: 100 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20, duration: 1.5 }}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-[70%]"
+      >
+        {/* Main island body with tropical gradient and organic shape */}
         <motion.div
-          animate={{ scale: [1, 1.05, 1] }}
+          animate={{
+            boxShadow: [
+              "0 25px 50px rgba(0,0,0,0.2)",
+              "0 35px 70px rgba(0,0,0,0.3)",
+              "0 25px 50px rgba(0,0,0,0.2)",
+            ],
+          }}
+          transition={{ duration: 5, repeat: Infinity }}
+          className="absolute inset-0 
+                     bg-gradient-to-br from-lime-300 via-emerald-400 to-green-600
+                     rounded-[60%_40%_70%_30%_/_50%_60%_40%_50%]
+                     border-8 border-yellow-200/50
+                     shadow-[inset_0_-20px_40px_rgba(0,0,0,0.1)]"
+        >
+          {/* Inner glow effect */}
+          <div className="absolute inset-0 
+                         bg-gradient-to-t from-transparent via-white/10 to-white/20
+                         rounded-[60%_40%_70%_30%_/_50%_60%_40%_50%]" />
+        </motion.div>
+
+        {/* �️ Enhanced beaches with gradient sand */}
+        <motion.div
+          animate={{ scale: [1, 1.02, 1] }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute bottom-12 left-1/4 w-1/3 h-16 
+                     bg-gradient-to-br from-yellow-200 via-amber-300 to-orange-300
+                     rounded-[50%_50%_40%_60%_/_60%_70%_30%_40%]
+                     shadow-[inset_0_4px_8px_rgba(0,0,0,0.1)]
+                     border-4 border-yellow-300/50"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.02, 1] }}
+          transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+          className="absolute bottom-16 right-1/3 w-1/4 h-14 
+                     bg-gradient-to-br from-yellow-100 via-yellow-200 to-amber-200
+                     rounded-[60%_40%_50%_50%_/_50%_60%_40%_50%]
+                     shadow-[inset_0_4px_8px_rgba(0,0,0,0.1)]
+                     border-4 border-yellow-200/50"
+        />
+
+        {/* � Crystal clear lagoon with shimmer */}
+        <motion.div
+          animate={{ 
+            scale: [1, 1.08, 1],
+            opacity: [0.8, 1, 0.8],
+          }}
           transition={{ duration: 6, repeat: Infinity }}
-          className="absolute top-1/3 left-1/3 w-24 h-16 bg-blue-300 rounded-[50%_40%_60%_50%_/_60%_50%_50%_40%] shadow-inner border border-blue-200"
-        ></motion.div>
-      </div>
+          className="absolute top-1/3 left-1/3 w-32 h-24 
+                     bg-gradient-to-br from-cyan-300 via-blue-400 to-blue-500
+                     rounded-[50%_40%_60%_50%_/_60%_50%_50%_40%]
+                     shadow-[inset_0_8px_16px_rgba(0,0,0,0.2),0_0_30px_rgba(0,212,255,0.4)]
+                     border-4 border-cyan-200"
+        >
+          {/* Water sparkles */}
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              animate={{
+                opacity: [0, 1, 0],
+                scale: [0.5, 1.5, 0.5],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.4,
+              }}
+              className="absolute w-2 h-2 bg-white rounded-full"
+              style={{
+                top: `${20 + i * 15}%`,
+                left: `${15 + i * 18}%`,
+              }}
+            />
+          ))}
+        </motion.div>
 
-      {/* ⛵ Bateau */}
-      <motion.div
-        className="absolute bottom-20 left-10 text-3xl"
-        animate={{ x: [0, 60, 0], y: [0, -5, 0] }}
-        transition={{ duration: 8, repeat: Infinity }}
-      >
-        ⛵
+        {/* 🗻 Volcanic mountain with glow */}
+        <motion.div
+          animate={{
+            y: [0, -3, 0],
+          }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute top-1/4 right-1/3 w-32 h-32"
+        >
+          <div className="relative w-full h-full">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2
+                           w-0 h-0 
+                           border-l-[80px] border-r-[80px] border-b-[120px]
+                           border-l-transparent border-r-transparent
+                           border-b-gradient-to-t from-orange-800 via-red-600 to-yellow-500
+                           filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.3)]"
+              style={{
+                borderBottomColor: 'transparent',
+                background: 'linear-gradient(to top, #92400e, #dc2626, #eab308)',
+                clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
+                width: '160px',
+                height: '120px',
+              }}
+            />
+            {/* Lava glow at peak */}
+            <motion.div
+              animate={{
+                opacity: [0.5, 1, 0.5],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8
+                         bg-gradient-to-br from-yellow-400 to-orange-500
+                         rounded-full blur-md"
+            />
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* 🐠 Poissons */}
+      {/* ⛵ Enhanced sailing boat with wake effect */}
       <motion.div
-        className="absolute bottom-32 right-8 text-2xl"
-        animate={{ x: [0, -60, 0] }}
-        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute bottom-24 left-12 z-10"
+        animate={{ x: [0, 80, 0], y: [0, -8, 0], rotate: [0, -5, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       >
-        🐠
-      </motion.div>
-      <motion.div
-        className="absolute bottom-28 right-32 text-xl"
-        animate={{ x: [0, -80, 0], y: [0, -5, 0] }}
-        transition={{ duration: 12, repeat: Infinity }}
-      >
-        🐟
-      </motion.div>
-
-      {/* 🦋 Papillons */}
-      <motion.div
-        className="absolute top-60 right-1/3 text-pink-400 text-xl"
-        animate={{ y: [0, -10, 0], rotate: [0, 10, -10, 0] }}
-        transition={{ duration: 5, repeat: Infinity }}
-      >
-        🦋
+        <div className="relative">
+          <span className="text-4xl filter drop-shadow-lg">⛵</span>
+          {/* Water wake trail */}
+          <motion.div
+            animate={{ opacity: [0.3, 0.6, 0.3], scaleX: [0.8, 1.2, 0.8] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute -bottom-2 -left-4 w-12 h-2 bg-blue-200/50 rounded-full blur-sm"
+          />
+        </div>
       </motion.div>
 
-            {/* 🌸 Fleurs tropicales dynamiques */}
-      {Array.from({ length: 10 }).map((_, i) => {
-        // Position et propriétés aléatoires
-        const randomLeft = Math.random() * 80 + 10; // entre 10% et 90%
-        const randomBottom = Math.random() * 40 + 10; // entre 10% et 50%
-        const emojis = ["🌸", "🌺", "🌼", "🌻", "🌷", "💮"];
-        const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-        const randomSize = Math.random() * 1.5 + 0.8; // taille 0.8x à 2.3x
-        const randomDelay = Math.random() * 2;
-        const randomRotation = Math.random() * 10;
+      {/* 🐠 Enhanced tropical fish school */}
+      <motion.div
+        className="absolute bottom-36 right-12 text-3xl z-10"
+        animate={{ 
+          x: [0, -80, 0],
+          y: [0, 10, 0],
+          rotate: [0, -10, 0]
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <motion.span
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 1, repeat: Infinity }}
+          className="filter drop-shadow-lg"
+        >
+          🐠
+        </motion.span>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-32 right-40 text-2xl z-10"
+        animate={{ 
+          x: [0, -100, 0],
+          y: [0, -8, 0]
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      >
+        <span className="filter drop-shadow-lg">🐟</span>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-40 right-24 text-xl z-10"
+        animate={{ 
+          x: [0, -70, 0],
+          y: [0, 12, 0]
+        }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      >
+        <span className="filter drop-shadow-lg">🦈</span>
+      </motion.div>
+
+      {/* 🦋 Colorful butterflies with flight paths */}
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={`butterfly-${i}`}
+          className="absolute text-2xl z-10"
+          style={{
+            top: `${35 + i * 10}%`,
+            right: `${20 + i * 15}%`,
+          }}
+          animate={{
+            x: [0, 40 * (i + 1), 0],
+            y: [0, -20 - i * 5, 0],
+            rotate: [0, 15, -15, 0],
+          }}
+          transition={{
+            duration: 6 + i,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.5,
+          }}
+        >
+          <motion.span
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 0.5, repeat: Infinity }}
+            className="filter drop-shadow-lg"
+            style={{
+              color: ['#FF69B4', '#FFD93D', '#A855F7'][i % 3],
+            }}
+          >
+            🦋
+          </motion.span>
+        </motion.div>
+      ))}
+
+      {/* 🌸 Enhanced tropical flowers with glow */}
+      {Array.from({ length: 12 }).map((_, i) => {
+        const randomLeft = 15 + (i * 6); // Distributed positioning
+        const randomBottom = 15 + Math.random() * 35;
+        const emojis = ["🌸", "🌺", "🌼", "🌻", "🌷", "💮", "🏵️"];
+        const emoji = emojis[i % emojis.length];
+        const randomSize = 0.9 + Math.random() * 1.2;
+        const randomDelay = i * 0.3;
 
         return (
           <motion.div
             key={`flower-${i}`}
-            className="absolute text-2xl"
+            className="absolute z-10 filter drop-shadow-lg"
             style={{
               left: `${randomLeft}%`,
               bottom: `${randomBottom}%`,
-              transform: `scale(${randomSize}) rotate(${randomRotation}deg)`,
+              fontSize: `${randomSize * 1.8}rem`,
             }}
+            initial={{ scale: 0, rotate: -180 }}
             animate={{
-              scale: [1, 1.3, 1],
-              rotate: [0, 5, -5, 0],
-              opacity: [0.8, 1, 0.9],
+              scale: [1, 1.15, 1],
+              rotate: [0, 8, -8, 0],
+              y: [0, -5, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 4 + Math.random() * 2,
               repeat: Infinity,
               delay: randomDelay,
+              ease: "easeInOut",
             }}
           >
             {emoji}
+            {/* Glow effect behind flower */}
+            <motion.div
+              animate={{
+                opacity: [0.3, 0.6, 0.3],
+                scale: [0.8, 1.2, 0.8],
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="absolute inset-0 bg-pink-300/30 rounded-full blur-md -z-10"
+            />
           </motion.div>
         );
       })}
 
 
-      {/* 🐢 Animaux mignons sur l'île */}
+      {/* 🐢 Enhanced cute island animals */}
       <motion.div
-        className="absolute bottom-36 left-1/4 text-2xl"
-        animate={{ x: [0, 30, 0], rotate: [0, 10, 0] }}
-        transition={{ duration: 15, repeat: Infinity }}
+        className="absolute bottom-40 left-1/4 text-3xl z-10 filter drop-shadow-lg"
+        animate={{ 
+          x: [0, 40, 0],
+          rotate: [0, 15, 0],
+          scale: [1, 1.1, 1]
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       >
         🐢
       </motion.div>
+
       <motion.div
-        className="absolute bottom-40 right-1/3 text-xl"
-        animate={{ y: [0, -5, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-44 right-1/3 text-2xl z-10 filter drop-shadow-lg"
+        animate={{ 
+          y: [0, -8, 0],
+          rotate: [0, -10, 10, 0]
+        }}
+        transition={{ duration: 2.5, repeat: Infinity }}
       >
         🦜
       </motion.div>
+
       <motion.div
-        className="absolute bottom-44 left-1/2 text-xl"
-        animate={{ x: [0, -20, 0] }}
-        transition={{ duration: 8, repeat: Infinity }}
+        className="absolute bottom-48 left-1/2 text-2xl z-10 filter drop-shadow-lg"
+        animate={{ 
+          x: [0, -25, 0],
+          scale: [1, 1.15, 1]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       >
         🐿️
       </motion.div>
 
+      <motion.div
+        className="absolute bottom-52 right-1/4 text-2xl z-10 filter drop-shadow-lg"
+        animate={{ 
+          y: [0, -10, 0],
+          x: [0, 15, 0]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      >
+        🦎
+      </motion.div>
 
-      {/* ⭐ Étoiles scintillantes */}
+
+      {/* ⭐ Enhanced twinkling stars */}
       {[
-        { top: "8%", left: "30%", delay: 0 },
-        { top: "12%", right: "15%", delay: 0.5 },
-        { top: "6%", left: "60%", delay: 1 },
+        { top: "8%", left: "30%", delay: 0, size: "text-2xl" },
+        { top: "12%", right: "15%", delay: 0.5, size: "text-xl" },
+        { top: "6%", left: "60%", delay: 1, size: "text-2xl" },
+        { top: "10%", left: "50%", delay: 1.5, size: "text-lg" },
       ].map((star, i) => (
         <motion.div
           key={`star-${i}`}
-          className="absolute text-yellow-300 text-xl"
+          className={`absolute ${star.size} z-10`}
           style={{ top: star.top, left: star.left, right: star.right }}
-          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity, delay: star.delay }}
+          animate={{ 
+            scale: [1, 1.8, 1],
+            opacity: [0.4, 1, 0.4],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ duration: 3, repeat: Infinity, delay: star.delay }}
         >
-          ⭐
+          <span className="filter drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]"
+                style={{ color: '#FFD93D' }}>
+            ⭐
+          </span>
         </motion.div>
       ))}
 
-      {/* 🦩 Flamants roses */}
+      {/* 🦩 Enhanced flamingos */}
       <motion.div
-        className="absolute bottom-24 left-1/3 text-2xl"
-        animate={{ y: [0, -10, 0], rotate: [0, -5, 0] }}
-        transition={{ duration: 4, repeat: Infinity }}
+        className="absolute bottom-28 left-1/3 text-3xl z-10 filter drop-shadow-lg"
+        animate={{ 
+          y: [0, -12, 0],
+          rotate: [0, -8, 0],
+          scale: [1, 1.05, 1]
+        }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       >
         🦩
       </motion.div>
 
-      {/* 🐚 Coquillages sur la plage */}
+      {/* 🐚 Enhanced seashells on beach */}
       {[
-        { bottom: "16%", left: "28%" },
-        { bottom: "18%", left: "35%" },
-        { bottom: "17%", right: "30%" },
+        { bottom: "18%", left: "28%", rotate: 15 },
+        { bottom: "20%", left: "35%", rotate: -20 },
+        { bottom: "19%", right: "30%", rotate: 25 },
+        { bottom: "21%", right: "38%", rotate: -15 },
       ].map((shell, i) => (
         <motion.div
           key={`shell-${i}`}
-          className="absolute text-pink-300 text-lg"
-          style={shell}
-          animate={{ rotate: [0, 10, -10, 0] }}
-          transition={{ duration: 5, repeat: Infinity, delay: i * 0.3 }}
+          className="absolute text-2xl z-10 filter drop-shadow-lg"
+          style={{ 
+            bottom: shell.bottom,
+            left: shell.left,
+            right: shell.right,
+          }}
+          initial={{ rotate: shell.rotate }}
+          animate={{ 
+            rotate: [shell.rotate, shell.rotate + 10, shell.rotate - 10, shell.rotate],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ duration: 6, repeat: Infinity, delay: i * 0.4 }}
         >
-          🐚
+          <span style={{ 
+            color: ['#FFB6D9', '#FF69B4', '#FFA500', '#FFD93D'][i % 4]
+          }}>
+            🐚
+          </span>
         </motion.div>
       ))}
-{/* 🌴 Forêt de palmiers dynamiques */}
-{Array.from({ length: 20 }).map((_, i) => {
-  const randomLeft = Math.random() * 80 + 10; // entre 10% et 90%
-  const randomBottom = Math.random() * 40 + 10; // entre 10% et 50%
-  const randomSize = Math.random() * 2 + 1; // entre 1x et 3x
-  const randomDelay = Math.random() * 4; // pour décaler les animations
-  return (
-    <motion.div
-      key={`palm-${i}`}
-      className="absolute"
-      style={{
-        left: `${randomLeft}%`,
-        bottom: `${randomBottom}%`,
-        transform: `scale(${randomSize})`,
-      }}
-      animate={{ rotate: [0, 3, -3, 0] }}
-      transition={{ duration: 5, repeat: Infinity, delay: randomDelay }}
-    >
-      <div className="text-5xl drop-shadow-[0_3px_2px_rgba(0,0,0,0.3)]">
-        🌴
-      </div>
-    </motion.div>
-  );
-})}
+      {/* 🌴 Enhanced tropical palm forest with depth */}
+      {Array.from({ length: 25 }).map((_, i) => {
+        const randomLeft = 12 + (i * 3.5); // Better distribution
+        const randomBottom = 18 + Math.random() * 35;
+        const randomSize = 1.2 + Math.random() * 1.8;
+        const randomDelay = i * 0.2;
+        const depth = i % 3; // Create layers for depth effect
+
+        return (
+          <motion.div
+            key={`palm-${i}`}
+            className="absolute z-10"
+            style={{
+              left: `${randomLeft}%`,
+              bottom: `${randomBottom}%`,
+              opacity: 1 - (depth * 0.1), // Farther palms are slightly faded
+            }}
+            initial={{ scale: 0, rotate: -45 }}
+            animate={{ 
+              scale: randomSize,
+              rotate: [0, 4, -4, 0],
+              y: [0, -3, 0]
+            }}
+            transition={{ 
+              duration: 6 + depth,
+              repeat: Infinity,
+              delay: randomDelay,
+              ease: "easeInOut"
+            }}
+          >
+            <div className={`filter drop-shadow-[0_5px_8px_rgba(0,0,0,0.4)]`}
+                 style={{ fontSize: `${2 + randomSize * 0.5}rem` }}>
+              🌴
+            </div>
+            {/* Shadow under palm */}
+            <motion.div
+              animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-2 
+                         bg-black/20 rounded-full blur-sm"
+            />
+          </motion.div>
+        );
+      })}
 
 
-      {/* 🦀 Crabe qui se promène */}
+      {/* 🦀 Enhanced walking crab */}
       <motion.div
-        className="absolute bottom-20 right-20 text-2xl"
-        animate={{ x: [0, -40, -80, -40, 0] }}
-        transition={{ duration: 20, repeat: Infinity }}
+        className="absolute bottom-24 right-24 text-3xl z-10 filter drop-shadow-lg"
+        animate={{ 
+          x: [0, -50, -100, -50, 0],
+          rotate: [0, -5, 0, 5, 0],
+          scale: [1, 1.1, 1, 1.1, 1]
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
       >
         🦀
       </motion.div>
 
-      {/* 🌊 Vagues animées */}
-      {[0, 1, 2].map((i) => (
+      {/* 🌊 Enhanced animated ocean waves */}
+      {[0, 1, 2, 3].map((i) => (
         <motion.div
           key={`wave-${i}`}
-          className="absolute bottom-12 w-full h-8 bg-blue-300/30 rounded-full"
-          style={{ left: `${i * 10}%` }}
-          animate={{ x: [0, 100, 0], scaleX: [1, 1.1, 1] }}
-          transition={{ duration: 8 + i, repeat: Infinity, delay: i * 0.5 }}
-        ></motion.div>
+          className="absolute bottom-0 w-full h-12 z-0"
+          style={{ 
+            left: `${i * 20}%`,
+            background: `linear-gradient(to top, rgba(56, 189, 248, ${0.2 - i * 0.04}), transparent)`,
+            borderRadius: '50% 50% 0 0'
+          }}
+          animate={{ 
+            x: [-50, 100, -50],
+            scaleX: [1, 1.15, 1],
+            scaleY: [1, 1.08, 1]
+          }}
+          transition={{ 
+            duration: 10 + i * 2,
+            repeat: Infinity,
+            delay: i * 0.8,
+            ease: "easeInOut"
+          }}
+        />
       ))}
 
-      {/* ☀️ Rayons de soleil */}
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
-        <motion.div
-          key={`ray-${i}`}
-          className="absolute top-16 left-20 w-1 h-12 bg-yellow-200/60 origin-bottom"
-          style={{ transform: `rotate(${angle}deg)` }}
-          animate={{ opacity: [0.3, 0.8, 0.3], scaleY: [1, 1.2, 1] }}
-          transition={{ duration: 3, repeat: Infinity, delay: i * 0.1 }}
-        ></motion.div>
-      ))}
+      {/* 🌟 Enhanced sunrays (handled by Sun component, keeping minimal here) */}
+      {/* Removed redundant sun rays as they're now part of the Sun component */}
 
-      {/* 🏙️ Villes interactives */}
+      {/* 🏙️ Interactive city markers - ✅ Original logic preserved */}
       {villes.map((ville, index) => (
         <motion.div
           key={ville.id}
-          animate={{ scale: 1 }}
-          transition={{ delay: index * 0.3, type: "spring", stiffness: 120 }}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ 
+            delay: 1 + index * 0.2,
+            type: "spring",
+            stiffness: 150,
+            damping: 15
+          }}
         >
           <CityMarker
             name={ville.name}
@@ -264,15 +556,101 @@ export default function IslandMap() {
         </motion.div>
       ))}
 
-      {/* 🎉 Message d’accueil */}
+      {/* 🎉 Enhanced welcome message with premium styling */}
       <motion.div
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-xl font-bold bg-sky-700/40 px-8 py-3 rounded-2xl backdrop-blur-md shadow-lg border border-white/20"
+        initial={{ y: 50, opacity: 0, scale: 0.8 }}
+        animate={{ y: 0, opacity: 1, scale: 1 }}
+        transition={{ 
+          type: "spring",
+          stiffness: 200,
+          damping: 20,
+          delay: 0.5
+        }}
+        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-30"
       >
-        🌴 Bienvenue sur <span className="text-yellow-200">Education Island</span> !
+        <motion.div
+          whileHover={{ scale: 1.05, y: -5 }}
+          className="relative px-10 py-4 rounded-3xl
+                     bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500
+                     border-4 border-white/60 shadow-2xl overflow-hidden"
+        >
+          {/* Animated background shimmer */}
+          <motion.div
+            animate={{
+              backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+            }}
+            transition={{ duration: 5, repeat: Infinity }}
+            className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/20
+                       bg-[length:200%_200%]"
+          />
+
+          {/* Text content */}
+          <div className="relative z-10 flex items-center gap-3">
+            <motion.span
+              animate={{ rotate: [0, 20, -20, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-3xl filter drop-shadow-lg"
+            >
+              🌴
+            </motion.span>
+            
+            <p className="font-bold text-2xl text-white drop-shadow-lg">
+              Bienvenue sur{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-400
+                             drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+                Education Island
+              </span>
+              {" "}!
+            </p>
+
+            <motion.span
+              animate={{ rotate: [0, -20, 20, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-3xl filter drop-shadow-lg"
+            >
+              🏝️
+            </motion.span>
+          </div>
+
+          {/* Floating sparkles */}
+          {[...Array(4)].map((_, i) => (
+            <motion.div
+              key={i}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0.5, 1, 0.5],
+                scale: [1, 1.5, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.5,
+              }}
+              className="absolute text-yellow-300 text-sm"
+              style={{
+                top: `${20 + i * 15}%`,
+                left: `${10 + i * 25}%`,
+              }}
+            >
+              ✨
+            </motion.div>
+          ))}
+        </motion.div>
       </motion.div>
+
+      {/* 🌈 Decorative rainbow arc */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 0.6, scale: 1 }}
+        transition={{ duration: 2, delay: 1 }}
+        className="absolute top-20 right-10 w-40 h-20 z-5"
+        style={{
+          background: 'linear-gradient(to right, #FF6B9D, #FFD93D, #C4FF61, #00D4FF, #A855F7)',
+          borderRadius: '50% 50% 0 0 / 100% 100% 0 0',
+          opacity: 0.5,
+          filter: 'blur(2px)',
+        }}
+      />
     </div>
   );
 }

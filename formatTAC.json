@@ -1,0 +1,17 @@
+{
+  "text": "La France est un pays qui se trouve en ___. Sa capitale est ___.",
+  "blanks": [
+    {
+      "position": 40,
+      "correctAnswer": "Europe",
+      "acceptedAnswers": ["europe", "UE"],
+      "hint": "Un continent"
+    },
+    {
+      "position": 60,
+      "correctAnswer": "Paris",
+      "hint": "Ville lumière"
+    }
+  ],
+  "hints": ["Pensez à la géographie européenne", "La capitale est une grande ville"]
+}

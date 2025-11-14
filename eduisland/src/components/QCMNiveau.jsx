@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../services/supabaseClient';
+import { saveNiveauCompletion } from '../services/gameAPI';
 
 const QCMNiveau = ({ niveauId, userId, onComplete }) => {
   const [niveauData, setNiveauData] = useState(null);
@@ -9,6 +10,7 @@ const QCMNiveau = ({ niveauId, userId, onComplete }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     fetchNiveauData();
@@ -60,40 +62,33 @@ const QCMNiveau = ({ niveauId, userId, onComplete }) => {
   };
 
   const completeNiveau = async () => {
+    console.log('QCM - completeNiveau appelé', { userId, niveauId, score, isCorrect });
     try {
-      const finalScore = score + (isCorrect ? 1 : 0);
+      setIsCompleted(true);
+      // Le score est déjà correct, pas besoin d'ajouter isCorrect car déjà compté dans handleAnswer
+      const finalScore = score;
       const totalQuestions = niveauData.content.questions.length;
-      const percentage = (finalScore / totalQuestions) * 100;
-      const xpEarned = Math.round((percentage / 100) * niveauData.xp_reward);
 
-      // Sauvegarder le score
-      await supabase.from('scores').insert({
-        user_id: userId,
-        niveau_id: niveauId,
-        score: finalScore,
-        max_score: totalQuestions,
-        completed_at: new Date().toISOString()
-      });
+      console.log('QCM - Score final:', { finalScore, totalQuestions });
 
-      // Mettre à jour l'XP de l'utilisateur
-      const { data: userData } = await supabase
-        .from('users')
-        .select('xp_total')
-        .eq('id', userId)
-        .single();
+      // Utiliser la fonction centralisée pour sauvegarder
+      const result = await saveNiveauCompletion(
+        userId,
+        niveauId,
+        finalScore,
+        totalQuestions,
+        niveauData.xp_reward
+      );
 
-      if (userData) {
-        await supabase
-          .from('users')
-          .update({ xp_total: userData.xp_total + xpEarned })
-          .eq('id', userId);
-      }
+      console.log('QCM - Résultat sauvegarde:', result);
 
-      if (onComplete) {
-        onComplete(finalScore, totalQuestions, xpEarned);
+      if (result.success && onComplete) {
+        console.log('QCM - Appel de onComplete');
+        onComplete(finalScore, totalQuestions, result.xpEarned);
       }
     } catch (error) {
       console.error('Erreur lors de la complétion du niveau:', error);
+      setIsCompleted(false);
     }
   };
 
@@ -101,6 +96,14 @@ const QCMNiveau = ({ niveauId, userId, onComplete }) => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-xl">Chargement du niveau...</div>
+      </div>
+    );
+  }
+
+  if (isCompleted) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-xl text-green-600">Sauvegarde en cours...</div>
       </div>
     );
   }

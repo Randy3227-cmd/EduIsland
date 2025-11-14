@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../services/supabaseClient';
+import { saveNiveauCompletion } from '../services/gameAPI';
 
 const TexteACompleter = ({ niveauId, userId, onComplete }) => {
   const [niveauData, setNiveauData] = useState(null);
@@ -8,6 +9,7 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     fetchNiveauData();
@@ -64,39 +66,29 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
   };
 
   const handleFinish = async () => {
+    console.log('Texte - handleFinish appelé', { userId, niveauId, score });
     try {
+      setIsCompleted(true);
       const totalBlanks = niveauData.content.blanks.length;
-      const percentage = (score / totalBlanks) * 100;
-      const xpEarned = Math.round((percentage / 100) * niveauData.xp_reward);
 
-      // Sauvegarder le score
-      await supabase.from('scores').insert({
-        user_id: userId,
-        niveau_id: niveauId,
-        score: score,
-        max_score: totalBlanks,
-        completed_at: new Date().toISOString()
-      });
+      // Utiliser la fonction centralisée pour sauvegarder
+      const result = await saveNiveauCompletion(
+        userId,
+        niveauId,
+        score,
+        totalBlanks,
+        niveauData.xp_reward
+      );
 
-      // Mettre à jour l'XP de l'utilisateur
-      const { data: userData } = await supabase
-        .from('users')
-        .select('xp_total')
-        .eq('id', userId)
-        .single();
+      console.log('Texte - Résultat sauvegarde:', result);
 
-      if (userData) {
-        await supabase
-          .from('users')
-          .update({ xp_total: userData.xp_total + xpEarned })
-          .eq('id', userId);
-      }
-
-      if (onComplete) {
-        onComplete(score, totalBlanks, xpEarned);
+      if (result.success && onComplete) {
+        console.log('Texte - Appel de onComplete');
+        onComplete(score, totalBlanks, result.xpEarned);
       }
     } catch (error) {
       console.error('Erreur lors de la complétion du niveau:', error);
+      setIsCompleted(false);
     }
   };
 
@@ -176,6 +168,14 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-xl">Chargement du niveau...</div>
+      </div>
+    );
+  }
+
+  if (isCompleted) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-xl text-green-600">Sauvegarde en cours...</div>
       </div>
     );
   }

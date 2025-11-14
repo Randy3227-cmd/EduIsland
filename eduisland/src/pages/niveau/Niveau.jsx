@@ -4,7 +4,7 @@ import { supabase } from "../../services/supabaseClient";
 
 // Import des composants (tu ne m'as pas demandé de les créer)
 import QCM from "../../components/QCMNiveau";
-// import Carte from "../../components/Carte";
+import Carte from "../../components/CarteCompleter";
 import Texte from "../../components/TexteACompleter";
 import NiveauComplete from "../../components/NiveauComplete";
 
@@ -96,7 +96,13 @@ export default function Niveau({ userId }) {
           onComplete={handleNiveauComplete}
         />
       )}
-      {/* {niveau.type === "carte" && <Carte niveauId={niveau.id} userId={userId} />} */}
+      {niveau.type === "carte" && (
+        <Carte 
+          niveauId={niveau.id} 
+          userId={userId} 
+          onComplete={handleNiveauComplete}
+        />
+      )}
       {niveau.type === "texte" && (
         <Texte 
           niveauId={niveau.id} 

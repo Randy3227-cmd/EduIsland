@@ -9,7 +9,6 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     fetchNiveauData();
@@ -52,10 +51,9 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
     
     niveauData.content.blanks.forEach((blank, index) => {
       const userAnswer = userAnswers[index].trim().toLowerCase();
-      const correctAnswer = blank.correctAnswer.toLowerCase();
-      const acceptedAnswers = blank.acceptedAnswers?.map(a => a.toLowerCase()) || [];
+      const correctAnswers = blank.correctAnswers?.map(a => a.toLowerCase()) || [];
       
-      if (userAnswer === correctAnswer || acceptedAnswers.includes(userAnswer)) {
+      if (correctAnswers.includes(userAnswer)) {
         correctCount++;
       }
     });
@@ -68,7 +66,6 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
   const handleFinish = async () => {
     console.log('Texte - handleFinish appelé', { userId, niveauId, score });
     try {
-      setIsCompleted(true);
       const totalBlanks = niveauData.content.blanks.length;
 
       // Utiliser la fonction centralisée pour sauvegarder
@@ -88,7 +85,6 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
       }
     } catch (error) {
       console.error('Erreur lors de la complétion du niveau:', error);
-      setIsCompleted(false);
     }
   };
 
@@ -97,10 +93,9 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
     
     const userAnswer = userAnswers[index].trim().toLowerCase();
     const blank = niveauData.content.blanks[index];
-    const correctAnswer = blank.correctAnswer.toLowerCase();
-    const acceptedAnswers = blank.acceptedAnswers?.map(a => a.toLowerCase()) || [];
+    const correctAnswers = blank.correctAnswers?.map(a => a.toLowerCase()) || [];
     
-    return userAnswer === correctAnswer || acceptedAnswers.includes(userAnswer);
+    return correctAnswers.includes(userAnswer);
   };
 
   const renderTextWithBlanks = () => {
@@ -168,14 +163,6 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-xl">Chargement du niveau...</div>
-      </div>
-    );
-  }
-
-  if (isCompleted) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-xl text-green-600">Sauvegarde en cours...</div>
       </div>
     );
   }

@@ -10,7 +10,6 @@ const QCMNiveau = ({ niveauId, userId, onComplete }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     fetchNiveauData();
@@ -64,7 +63,6 @@ const QCMNiveau = ({ niveauId, userId, onComplete }) => {
   const completeNiveau = async () => {
     console.log('QCM - completeNiveau appelé', { userId, niveauId, score, isCorrect });
     try {
-      setIsCompleted(true);
       // Le score est déjà correct, pas besoin d'ajouter isCorrect car déjà compté dans handleAnswer
       const finalScore = score;
       const totalQuestions = niveauData.content.questions.length;
@@ -88,7 +86,6 @@ const QCMNiveau = ({ niveauId, userId, onComplete }) => {
       }
     } catch (error) {
       console.error('Erreur lors de la complétion du niveau:', error);
-      setIsCompleted(false);
     }
   };
 
@@ -96,14 +93,6 @@ const QCMNiveau = ({ niveauId, userId, onComplete }) => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-xl">Chargement du niveau...</div>
-      </div>
-    );
-  }
-
-  if (isCompleted) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-xl text-green-600">Sauvegarde en cours...</div>
       </div>
     );
   }

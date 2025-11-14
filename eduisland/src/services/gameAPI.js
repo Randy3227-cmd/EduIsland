@@ -19,11 +19,12 @@ export const saveNiveauCompletion = async (userId, niveauId, score, maxScore, xp
 
     console.log('saveNiveauCompletion - XP calculé:', { percentage, xpEarned });
 
-    // Sauvegarder le score (sans max_score car la colonne n'existe pas)
+    // Sauvegarder le score avec max_score
     const scoreData = {
       user_id: userId,
       niveau_id: niveauId,
       score: score,
+      max_score: maxScore,
       completed_at: new Date().toISOString()
     };
 
@@ -92,7 +93,7 @@ export const getNiveauStats = async (userId, niveauId) => {
   try {
     const { data, error } = await supabase
       .from('scores')
-      .select('score')
+      .select('score, max_score')
       .eq('user_id', userId)
       .eq('niveau_id', niveauId)
       .order('score', { ascending: false });
@@ -102,14 +103,16 @@ export const getNiveauStats = async (userId, niveauId) => {
     if (data && data.length > 0) {
       return {
         bestScore: data[0].score,
-        attempts: data.length
+        maxScore: data[0].max_score,
+        attempts: data.length,
+        percentage: Math.round((data[0].score / data[0].max_score) * 100)
       };
     }
 
-    return { bestScore: 0, attempts: 0 };
+    return { bestScore: 0, maxScore: 0, attempts: 0, percentage: 0 };
   } catch (error) {
     console.error('Erreur lors de la récupération des stats:', error);
-    return { bestScore: 0, attempts: 0 };
+    return { bestScore: 0, maxScore: 0, attempts: 0, percentage: 0 };
   }
 };
 

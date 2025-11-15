@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
  * Features: Glowing orbs, progress path, unlock animations, 3D depth
  * Preserves all original props and onClick logic
  */
-export default function NiveauCard({ niveau, index, total, onClick }) {
-  // ✅ Original logic preserved
+export default function NiveauCard({ niveau, index, total, onClick, userScore }) {
   const isLast = index === total - 1;
+  const hasScore = userScore && userScore.score !== undefined;
+  const isPerfect = hasScore && userScore.percentage === 100;
 
   // Dynamic color schemes for variety
   const levelColors = [
@@ -26,26 +27,21 @@ export default function NiveauCard({ niveau, index, total, onClick }) {
       <motion.div
         initial={{ scale: 0, opacity: 0, rotateY: 180 }}
         animate={{ scale: 1, opacity: 1, rotateY: 0 }}
-        transition={{ 
-          type: "spring", 
-          stiffness: 200,
-          delay: index * 0.15 
-        }}
-        whileHover={{ 
-          scale: 1.2, 
-          rotate: [0, -5, 5, 0],
-          transition: { type: "spring", stiffness: 300 }
-        }}
+        transition={{ type: "spring", stiffness: 200, delay: index * 0.15 }}
+        whileHover={{ scale: 1.2, rotate: [0, -5, 5, 0], transition: { type: "spring", stiffness: 300 } }}
         whileTap={{ scale: 0.9 }}
         onClick={() => onClick?.(niveau)}
-        className="relative cursor-pointer z-10 group"
+        className={`relative w-20 h-20 flex items-center justify-center rounded-full shadow-xl cursor-pointer border-4 transition-all z-10 ${
+          isPerfect 
+            ? 'bg-gradient-to-br from-yellow-300 via-yellow-400 to-amber-500 border-yellow-200 hover:shadow-yellow-400' 
+            : hasScore
+            ? 'bg-gradient-to-br from-blue-400 via-cyan-400 to-sky-400 border-blue-200 hover:shadow-blue-400'
+            : 'bg-gradient-to-br from-emerald-400 via-green-400 to-lime-400 border-white hover:shadow-emerald-400'
+        }`}
       >
-        {/* ✨ Outer glow effect - animated pulse */}
+        {/* ✨ Outer glow effect */}
         <motion.div
-          animate={{
-            scale: [1, 1.4, 1],
-            opacity: [0.3, 0.7, 0.3],
-          }}
+          animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.7, 0.3] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="absolute inset-0 w-28 h-28 rounded-full blur-2xl"
           style={{ backgroundColor: colorScheme.glow }}
@@ -61,57 +57,33 @@ export default function NiveauCard({ niveau, index, total, onClick }) {
             <div
               key={i}
               className="absolute w-2 h-2 bg-white rounded-full"
-              style={{
-                top: "50%",
-                left: "50%",
-                transform: `rotate(${i * 45}deg) translateY(-60px)`,
-              }}
+              style={{ top: "50%", left: "50%", transform: `rotate(${i * 45}deg) translateY(-60px)` }}
             />
           ))}
         </motion.div>
 
-        {/* 💎 Main orb with gradient and 3D depth */}
-        <div className={`relative w-28 h-28 rounded-full p-1
-                        bg-gradient-to-br from-yellow-300 via-pink-300 to-purple-400
-                        shadow-2xl group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]
-                        transition-all duration-300`}>
-          
-          {/* Inner orb with gradient */}
-          <div className={`w-full h-full rounded-full
-                          bg-gradient-to-br ${colorScheme.main}
-                          border-4 border-white/80
-                          shadow-[inset_0_-8px_16px_rgba(0,0,0,0.3),inset_0_8px_16px_rgba(255,255,255,0.3)]
-                          flex flex-col items-center justify-center
-                          group-hover:shadow-[inset_0_-10px_20px_rgba(0,0,0,0.4),inset_0_10px_20px_rgba(255,255,255,0.4)]
-                          transition-all duration-300 relative overflow-hidden`}>
+        {/* 💎 Main orb */}
+        <div className={`relative w-28 h-28 rounded-full p-1 bg-gradient-to-br from-yellow-300 via-pink-300 to-purple-400 shadow-2xl group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300`}>
+          {/* Inner orb */}
+          <div className={`w-full h-full rounded-full bg-gradient-to-br ${colorScheme.main} border-4 border-white/80 shadow-[inset_0_-8px_16px_rgba(0,0,0,0.3),inset_0_8px_16px_rgba(255,255,255,0.3)] flex flex-col items-center justify-center group-hover:shadow-[inset_0_-10px_20px_rgba(0,0,0,0.4),inset_0_10px_20px_rgba(255,255,255,0.4)] transition-all duration-300 relative overflow-hidden`}>
             
-            {/* Shine effect animation */}
+            {/* Shine effect */}
             <motion.div
-              animate={{
-                x: ["-100%", "200%"],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                repeatDelay: 2,
-              }}
-              className="absolute inset-0 w-full h-full
-                         bg-gradient-to-r from-transparent via-white/40 to-transparent
-                         transform rotate-45"
+              animate={{ x: ["-100%", "200%"] }}
+              transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
+              className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transform rotate-45"
             />
 
             {/* 🔢 Level number */}
             <motion.span
-              animate={{ 
-                scale: [1, 1.1, 1],
-              }}
+              animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="relative text-white font-black text-3xl drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
             >
               {niveau.level_number}
             </motion.span>
 
-            {/* 🏆 Crown icon for first level */}
+            {/* 👑 Crown icon */}
             {index === 0 && (
               <motion.div
                 animate={{ rotate: [-10, 10, -10] }}
@@ -121,28 +93,31 @@ export default function NiveauCard({ niveau, index, total, onClick }) {
                 👑
               </motion.div>
             )}
+
+            {/* ⭐ Badge si score parfait */}
+            {isPerfect && (
+              <span className="absolute -top-2 -right-2 text-2xl animate-pulse">⭐</span>
+            )}
+
+            {/* Score affiché */}
+            {hasScore && (
+              <div className="absolute -top-8 bg-white px-2 py-1 rounded-lg shadow-md border-2 border-gray-200">
+                <span className="text-xs font-bold text-gray-700">
+                  {userScore.score}/{userScore.maxScore}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* ⭐ Floating stars decoration */}
+        {/* ⭐ Floating stars */}
         {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
-            animate={{
-              y: [0, -15, 0],
-              rotate: [0, 180, 360],
-              opacity: [0.5, 1, 0.5],
-            }}
-            transition={{
-              duration: 2 + i * 0.3,
-              repeat: Infinity,
-              delay: i * 0.2,
-            }}
+            animate={{ y: [0, -15, 0], rotate: [0, 180, 360], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2 + i * 0.3, repeat: Infinity, delay: i * 0.2 }}
             className="absolute text-yellow-300 text-sm pointer-events-none"
-            style={{
-              top: `${10 + i * 10}px`,
-              left: `${-20 + i * 10}px`,
-            }}
+            style={{ top: `${10 + i * 10}px`, left: `${-20 + i * 10}px` }}
           >
             ✨
           </motion.div>
@@ -155,11 +130,7 @@ export default function NiveauCard({ niveau, index, total, onClick }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.15 + 0.2 }}
         whileHover={{ scale: 1.15 }}
-        className="mt-3 px-4 py-2 rounded-full
-                   bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500
-                   border-3 border-white shadow-xl
-                   flex items-center gap-2 cursor-pointer
-                   hover:shadow-2xl transition-all"
+        className="mt-3 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 border-3 border-white shadow-xl flex items-center gap-2 cursor-pointer hover:shadow-2xl transition-all"
       >
         <span className="text-lg">🔥</span>
         <span className="font-bold text-white text-sm drop-shadow">
@@ -167,53 +138,25 @@ export default function NiveauCard({ niveau, index, total, onClick }) {
         </span>
       </motion.div>
 
-      {/* 🛤️ Connection path to next level */}
+      {/* 🛤️ Connection path */}
       {!isLast && (
         <motion.div
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{ scaleY: 1, opacity: 1 }}
-          transition={{ 
-            delay: index * 0.15 + 0.3,
-            duration: 0.5,
-            ease: "easeOut"
-          }}
+          transition={{ delay: index * 0.15 + 0.3, duration: 0.5, ease: "easeOut" }}
           className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-20 z-0"
           style={{ marginTop: "16px" }}
         >
-          {/* Gradient path with glow */}
           <div className="relative w-full h-full">
-            <div className={`absolute inset-0 rounded-full
-                            bg-gradient-to-b ${colorScheme.main}
-                            shadow-[0_0_20px_${colorScheme.glow}]`} />
-            
-            {/* Animated dots along the path */}
+            <div className={`absolute inset-0 rounded-full bg-gradient-to-b ${colorScheme.main} shadow-[0_0_20px_${colorScheme.glow}]`} />
             <motion.div
               animate={{ y: ["0%", "100%"] }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              className="absolute left-1/2 -translate-x-1/2 w-3 h-3 
-                         bg-white rounded-full shadow-lg"
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              className="absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-white rounded-full shadow-lg"
             />
           </div>
         </motion.div>
       )}
-
-      {/* 🎯 Level completion indicator (for future use) */}
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: index * 0.15 + 0.4 }}
-        className="absolute -top-2 -right-2 z-20"
-      >
-        {/* Can be conditionally shown based on completion status */}
-        {/* <div className="w-8 h-8 rounded-full bg-green-500 border-3 border-white
-                        flex items-center justify-center text-white font-bold shadow-lg">
-          ✓
-        </div> */}
-      </motion.div>
     </div>
   );
 }

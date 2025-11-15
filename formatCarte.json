@@ -1,0 +1,21 @@
+{
+    "image": "/images/corps_humain.png",
+    "question": "Clique sur le cœur sur l'image.",
+    "zones": [
+      {
+        "name": "cœur",
+        "x": 120,
+        "y": 180,
+        "radius": 30,
+        "hint": "Centre du thorax légèrement à gauche"
+      },
+      {
+        "name": "foie",
+        "x": 150,
+        "y": 250,
+        "radius": 40,
+        "hint": "Sous le diaphragme côté droit"
+      }
+    ]
+  }
+  

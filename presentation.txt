@@ -1,0 +1,90 @@
+Equipe : LevelThree
+
+Bonjour à tous,
+Nous sommes l’équipe LevelThree — “Level” pour l’univers du jeu, et “Three” parce que nous sommes trois membres.
+
+Notre groupe est composé de :
+
+Robinson Solomampionona Randy,
+
+Randriamamonjy Riana Mitantsoa,
+
+Rakotobe Faniry Ntsoa Eva.
+
+Nous participons aujourd’hui au Hackathon « Cultive de demain », organisé par l’Institut Français de Madagascar.
+
+Notre sous-thème est : La technologie au service de l’éducation.
+
+🌱 Pourquoi ce thème ?
+
+À Madagascar, beaucoup d’élèves apprennent encore par cœur au lieu d’apprendre par compréhension.
+Cela rend l’apprentissage fragile, difficile, et souvent décourageant.
+
+Nous voulions donc proposer une solution moderne, ludique et adaptée aux enfants malgaches.
+C’est ainsi que nous avons créé notre projet : Education Island.
+
+🏝️ Education Island : c’est quoi ?
+
+Education Island est une application web éducative développée avec :
+
+ReactJS pour une interface moderne,
+
+TailwindCSS pour un design propre et dynamique,
+
+Supabase pour gérer notre base de données en ligne.
+
+C’est une île interactive, destinée aux élèves du primaire — de la 12ᵉ à la 7ᵉ — où les enfants apprennent en s’amusant, avec un seul objectif :
+👉 remplacer l’apprentissage par cœur par l’apprentissage par compréhension.
+
+Le programme scolaire malgache est intégré dans les niveaux du jeu, pour accompagner réellement les cours vus à l’école.
+
+🌍 Une île inspirée de Madagascar
+
+L’île est divisée en plusieurs villes, et chaque ville représente des matières scolaires.
+
+Chaque matière contient plusieurs niveaux, et chaque niveau permet de gagner de l’XP, qui symbolise la progression de l’enfant et sert aussi d’unité d’évolution dans le jeu.
+
+La première ville, « L’île des mots doux », qui représente les bases du français, est disponible dès le début.
+
+Pour débloquer ensuite « La Baie des savants », il faut atteindre 50 XP, puis d’autres villes s’ouvrent progressivement.
+Cela motive l’enfant à apprendre tout en avançant dans son aventure.
+
+🎮 Quels types de niveaux ?
+
+Notre application propose trois types d’activités :
+
+QCM – Questions à Choix Multiple
+
+Cartes ou images à compléter
+
+Textes à trous
+
+Ces trois formats rendent l’apprentissage plus ludique, interactif, et proche des jeux que les enfants aiment déjà utiliser.
+
+🔮 Et pour la suite ?
+
+Notre vision pour l’avenir est ambitieuse.
+
+Nous souhaitons :
+
+étendre Education Island aux collégiens et lycéens,
+
+rendre l’application plus immersive avec des effets sonores et une vraie ambiance de jeu,
+
+ajouter de nouveaux types de niveaux plus variés et plus stimulants,
+
+intégrer une voix off pour aider les enfants qui ont des difficultés de lecture,
+
+et pourquoi pas, à long terme, proposer des défis éducatifs multijoueur.
+
+L’objectif est que l’éducation devienne non seulement plus efficace, mais aussi plus motivante.
+
+✨ Conclusion
+
+Avec Education Island, nous voulons prouver que la technologie peut transformer l’éducation à Madagascar.
+Pas en remplaçant les enseignants, mais en aidant les enfants à mieux comprendre, à mieux retenir, et surtout à prendre plaisir à apprendre.
+
+Nous sommes LevelThree, et nous croyons que l’éducation de demain peut être moderne, interactive…
+et pourquoi pas, prendre la forme d’une île pleine d’aventures.
+
+Merci pour votre attention.

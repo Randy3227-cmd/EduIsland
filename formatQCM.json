@@ -1,0 +1,10 @@
+{
+  "questions": [
+    {
+      "question": "Quelle est la capitale de la France ?",
+      "options": ["Paris", "Lyon", "Marseille", "Bordeaux"],
+      "correctAnswer": "Paris",
+      "explanation": "Paris est la capitale de la France depuis le Moyen Âge."
+    }
+  ]
+}

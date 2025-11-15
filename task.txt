@@ -111,3 +111,5 @@ Tests et optimisation pour mobile/web
 mdp supabase : wxcvbn3227!1
 project url : https://zhteasarrbuiavccnzrx.supabase.co
 anon public key : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpodGVhc2FycmJ1aWF2Y2NuenJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4OTAyMzksImV4cCI6MjA3ODQ2NjIzOX0.o0PLt1X1sbFWREFh0RQfwHe1uOObseIUaY60X68jm5A
+
+hvushvweiovhwoevhwovhwueohvwovhweovw

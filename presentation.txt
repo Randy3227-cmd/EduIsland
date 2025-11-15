@@ -40,7 +40,7 @@ Le programme scolaire malgache est intégré dans les niveaux du jeu, pour accom
 
 🌍 Une île inspirée de Madagascar
 
-L’île est divisée en plusieurs villes, et chaque ville représente une matière scolaire.
+L’île est divisée en plusieurs villes, et chaque ville représente des matières scolaires.
 
 Chaque matière contient plusieurs niveaux, et chaque niveau permet de gagner de l’XP, qui symbolise la progression de l’enfant et sert aussi d’unité d’évolution dans le jeu.
 

@@ -149,7 +149,7 @@ export default function Matiere({ userId }) {
       </div>
 
       {/* 🔙 Back button */}
-      <motion.button onClick={() => navigate("/")}
+      <motion.button onClick={() => navigate("/island")}
                      initial={{ scale: 0, opacity: 0 }}
                      animate={{ scale: 1, opacity: 1 }}
                      transition={{ delay: 0.8, type: "spring", stiffness: 200 }}

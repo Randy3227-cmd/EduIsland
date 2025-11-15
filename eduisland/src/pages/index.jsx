@@ -6,17 +6,14 @@ import UserProfile from "../components/UserProfil";
 import { useNavigate } from "react-router-dom";
 import Sun from "../components/Sun";
 import Clouds from "../components/Clouds";
+import { useLocation } from "react-router-dom";
 
-/* 🏝️ Modern Futuristic Island Map - Main Page
- * Features: Vibrant gradients, 3D island, tropical decorations, smooth animations
- * Preserves all original data fetching and navigation logic
- */
 export default function IslandMap() {
-  // ✅ Original state and navigation logic preserved
   const [villes, setVilles] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
+  const userId = location.state?.userId;
 
-  // ✅ Original data fetching logic preserved
   useEffect(() => {
     const fetchVilles = async () => {
       const { data, error } = await supabase.from("villes").select("*");
@@ -26,7 +23,6 @@ export default function IslandMap() {
     fetchVilles();
   }, []);
 
-  // ✅ Original city positions preserved
   const positions = [
     { top: "40%", left: "50%" },
     { top: "55%", left: "85%" },
@@ -72,7 +68,7 @@ export default function IslandMap() {
       <Clouds />
 
       {/* 👤 User profile */}
-      <UserProfile userId={"a1e6874a-bebe-46d6-949c-c0ce5df3b9ae"} />
+      <UserProfile />
 
       {/* �️ Enhanced Main Island with 3D depth and vibrant colors */}
       <motion.div

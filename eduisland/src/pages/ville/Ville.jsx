@@ -7,18 +7,12 @@ import House from "../../components/House";
 import Sun from "../../components/Sun";
 import Clouds from "../../components/Clouds";
 
-/* 🏙️ Modern Futuristic City View Page
- * Features: Vibrant gradients, enhanced cityscape, animated houses, premium UI
- * Preserves all original data fetching and navigation logic
- */
-export default function Ville() {
-  // ✅ Original state and hooks preserved
+export default function Ville({userId}) {
   const { id } = useParams();
   const [ville, setVille] = useState(null);
   const [matieres, setMatieres] = useState([]);
   const navigate = useNavigate();
 
-  // ✅ Original data fetching logic preserved
   useEffect(() => {
     const fetchData = async () => {
       const { data: villeData, error: villeError } = await supabase
@@ -93,7 +87,7 @@ export default function Ville() {
       <Clouds />
 
       {/* 👤 User profile */}
-      <UserProfile userId={"a1e6874a-bebe-46d6-949c-c0ce5df3b9ae"} />
+      <UserProfile />
 
       {/* 🏙️ City title banner with premium styling */}
       <motion.div
@@ -206,19 +200,42 @@ export default function Ville() {
         ))}
       </motion.div>
 
-      {/* 🏠 Subject houses - ✅ Original logic preserved */}
       {matieres.map((matiere, index) => (
-        <House
-          key={matiere.id}
-          matiere={matiere}
-          position={positions[index % positions.length]}
-          onClick={() => navigate(`/matiere/${matiere.id}`)}
-        />
-      ))}
+  <House
+    key={matiere.id}
+    matiere={matiere}
+    position={positions[index % positions.length]}
+    onClick={async () => {
+      if (!userId) {
+        alert("Utilisateur non connecté !");
+        return;
+      }
+
+      const { data: userData, error: userError } = await supabase
+        .from("users")
+        .select("xp_total")
+        .eq("id", userId)
+        .single();
+
+      if (userError) {
+        console.error("Erreur récupération user :", userError);
+        return;
+      }
+
+      if (userData.xp_total < ville.xp_required) {
+        alert(`Vous avez besoin de ${ville.xp_required} XP pour accéder à cette ville. Votre XP actuelle : ${userData.xp_total}`);
+        return;
+      }
+
+      navigate(`/matiere/${matiere.id}`, { state: { userId } });
+    }}
+  />
+))}
+
 
       {/* 🔙 Enhanced back button */}
       <motion.button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/island")}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.5, type: "spring", stiffness: 200 }}

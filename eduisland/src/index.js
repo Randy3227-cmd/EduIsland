@@ -7,18 +7,39 @@ import Ile from "./pages/index";
 import Ville from "./pages/ville/Ville";
 import Matiere from "./pages/matiere/Matiere";
 import Niveau from "./pages/niveau/Niveau";
+import Login from "./pages/login";
 
-// ID utilisateur temporaire - à remplacer par l'authentification réelle
-const TEMP_USER_ID = "a1e6874a-bebe-46d6-949c-c0ce5df3b9ae";
+import { UserProvider, useUser } from "./context/UserContext"; // ton UserContext
+
+// Wrapper pour injecter userId dans Niveau
+function NiveauWrapper() {
+  const { user } = useUser();
+  return <Niveau userId={user?.id} />;
+}
+
+// Wrapper pour injecter userId dans Matiere
+function MatiereWrapper() {
+  const { user } = useUser();
+  return <Matiere userId={user?.id} />;
+}
+
+// Wrapper pour injecter userId dans Ville (optionnel)
+function VilleWrapper() {
+  const { user } = useUser();
+  return <Ville userId={user?.id} />;
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Ile />} />
-      <Route path="/ville/:id" element={<Ville userId={TEMP_USER_ID} />} />
-      <Route path="/matiere/:id" element={<Matiere userId={TEMP_USER_ID} />} />
-      <Route path="/niveau/:id" element={<Niveau userId={TEMP_USER_ID} />} />
-    </Routes>
+    <UserProvider>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/island" element={<Ile />} />
+        <Route path="/ville/:id" element={<VilleWrapper />} />
+        <Route path="/matiere/:id" element={<MatiereWrapper />} />
+        <Route path="/niveau/:id" element={<NiveauWrapper />} />
+      </Routes>
+    </UserProvider>
   </BrowserRouter>
 );

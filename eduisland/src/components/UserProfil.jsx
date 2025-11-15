@@ -1,31 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { supabase } from "../services/supabaseClient";
+import { useUser } from "../context/UserContext";
 
-/* 🎨 Modern Futuristic User Profile Component
- * Features: Tropical gradient, 3D depth, floating animation, glow effects
- * Preserves all original logic and data fetching
- */
-export default function UserProfile({ userId }) {
-  // ✅ Original state logic preserved
-  const [user, setUser] = useState(null);
+export default function UserProfile() {
+  const { user } = useUser();
 
-  // ✅ Original data fetching logic preserved
-  useEffect(() => {
-    const fetchUser = async () => {
-      if (!userId) return;
-      const { data, error } = await supabase
-        .from("users")
-        .select("*")
-        .eq("id", userId)
-        .single();
-
-      if (error) console.error("Erreur fetch user:", error);
-      else setUser(data);
-    };
-
-    fetchUser();
-  }, [userId]);
 
   if (!user) return null;
 

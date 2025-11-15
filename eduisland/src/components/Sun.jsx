@@ -82,39 +82,6 @@ export default function Sun() {
           </motion.div>
         </div>
       </motion.div>
-
-      {/* ☀️ Dynamic sun rays with varied lengths */}
-      {Array.from({ length: 16 }).map((_, i) => {
-        const angle = (i * 360) / 16;
-        const isLong = i % 2 === 0;
-        
-        return (
-          <motion.div
-            key={i}
-            className={`absolute ${isLong ? 'w-2 h-16' : 'w-1.5 h-12'}
-                       bg-gradient-to-t from-yellow-400 via-orange-400 to-transparent
-                       rounded-full origin-bottom shadow-lg`}
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: `rotate(${angle}deg) translateY(-100%)`,
-              transformOrigin: "bottom center",
-            }}
-            animate={{
-              scaleY: [1, isLong ? 1.4 : 1.2, 1],
-              opacity: [0.7, 1, 0.7],
-              rotate: [angle, angle + 5, angle],
-            }}
-            transition={{
-              duration: 4 + (i % 4),
-              repeat: Infinity,
-              delay: i * 0.15,
-              ease: "easeInOut",
-            }}
-          />
-        );
-      })}
-
       {/* 🌈 Rainbow shimmer effect */}
       <motion.div
         animate={{

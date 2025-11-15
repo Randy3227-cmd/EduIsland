@@ -27,8 +27,8 @@ export default function NiveauCard({ niveau, index, total, onClick, userScore })
       <motion.div
         initial={{ scale: 0, opacity: 0, rotateY: 180 }}
         animate={{ scale: 1, opacity: 1, rotateY: 0 }}
-        transition={{ type: "spring", stiffness: 200, delay: index * 0.15 }}
-        whileHover={{ scale: 1.2, rotate: [0, -5, 5, 0], transition: { type: "spring", stiffness: 300 } }}
+        transition={{ type: "tween", stiffness: 200, delay: index * 0.15 }}
+        whileHover={{ scale: 1.2, rotate: [0, -5, 5, 0], transition: { type: "tween", stiffness: 300 } }}
         whileTap={{ scale: 0.9 }}
         onClick={() => onClick?.(niveau)}
         className={`relative w-20 h-20 flex items-center justify-center rounded-full shadow-xl cursor-pointer border-4 transition-all z-10 ${

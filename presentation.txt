@@ -17,12 +17,11 @@ Notre sous-thème est : La technologie au service de l’éducation.
 
 🌱 Pourquoi ce thème ?
 
-À Madagascar, beaucoup d’élèves apprennent encore par cœur au lieu d’apprendre par compréhension.
-Cela rend l’apprentissage fragile, difficile, et souvent décourageant.
+À Madagascar, beaucoup d’enfants apprennent encore en répétant mécaniquement les mots et les notions.
+Pour rendre l’apprentissage plus solide et motivant, nous avons imaginé une méthode où chaque concept se découvre en pratiquant et en expérimentant.
 
-Nous voulions donc proposer une solution moderne, ludique et adaptée aux enfants malgaches.
-C’est ainsi que nous avons créé notre projet : Education Island.
-
+Avec Education Island, chaque niveau propose des défis interactifs : lire, réfléchir, choisir la bonne réponse et comprendre pourquoi elle est correcte.
+Les enfants ne se contentent plus d’apprendre par cœur ; ils développent leur compréhension et progressent à leur rythme, tout en s’amusant.
 🏝️ Education Island : c’est quoi ?
 
 Education Island est une application web éducative développée avec :
@@ -34,7 +33,7 @@ TailwindCSS pour un design propre et dynamique,
 Supabase pour gérer notre base de données en ligne.
 
 C’est une île interactive, destinée aux élèves du primaire — de la 12ᵉ à la 7ᵉ — où les enfants apprennent en s’amusant, avec un seul objectif :
-👉 remplacer l’apprentissage par cœur par l’apprentissage par compréhension.
+👉 rendre l’apprentissage plus solide et motivant
 
 Le programme scolaire malgache est intégré dans les niveaux du jeu, pour accompagner réellement les cours vus à l’école.
 

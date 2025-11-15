@@ -1,4 +1,3 @@
-npx create-react-app EduIsland
 cd eduisland
 
 npm install -D tailwindcss@3.4.1 postcss autoprefixer

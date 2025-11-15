@@ -28,11 +28,11 @@ export default function IslandMap() {
 
   // ✅ Original city positions preserved
   const positions = [
-    { top: "40%", left: "35%" },
-    { top: "55%", left: "45%" },
+    { top: "40%", left: "50%" },
+    { top: "55%", left: "85%" },
     { top: "35%", left: "70%" },
     { top: "50%", left: "60%" },
-    { top: "80%", left: "30%" }
+    { top: "80%", left: "90%" }
   ];
 
   return (
@@ -215,9 +215,9 @@ export default function IslandMap() {
 
       {/* 🐠 Enhanced tropical fish school */}
       <motion.div
-        className="absolute bottom-36 right-12 text-3xl z-10"
+        className="absolute bottom-36 left-24 text-3xl z-10"
         animate={{ 
-          x: [0, -80, 0],
+          x: [0, 80, 0],
           y: [0, 10, 0],
           rotate: [0, -10, 0]
         }}
@@ -233,7 +233,7 @@ export default function IslandMap() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-32 right-40 text-2xl z-10"
+        className="absolute bottom-64 left-24 text-2xl z-10"
         animate={{ 
           x: [0, -100, 0],
           y: [0, -8, 0]
@@ -241,17 +241,6 @@ export default function IslandMap() {
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       >
         <span className="filter drop-shadow-lg">🐟</span>
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-40 right-24 text-xl z-10"
-        animate={{ 
-          x: [0, -70, 0],
-          y: [0, 12, 0]
-        }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-      >
-        <span className="filter drop-shadow-lg">🦈</span>
       </motion.div>
 
       {/* 🦋 Colorful butterflies with flight paths */}
@@ -288,64 +277,7 @@ export default function IslandMap() {
         </motion.div>
       ))}
 
-      {/* 🌸 Enhanced tropical flowers with glow */}
-      {Array.from({ length: 12 }).map((_, i) => {
-        const randomLeft = 15 + (i * 6); // Distributed positioning
-        const randomBottom = 15 + Math.random() * 35;
-        const emojis = ["🌸", "🌺", "🌼", "🌻", "🌷", "💮", "🏵️"];
-        const emoji = emojis[i % emojis.length];
-        const randomSize = 0.9 + Math.random() * 1.2;
-        const randomDelay = i * 0.3;
-
-        return (
-          <motion.div
-            key={`flower-${i}`}
-            className="absolute z-10 filter drop-shadow-lg"
-            style={{
-              left: `${randomLeft}%`,
-              bottom: `${randomBottom}%`,
-              fontSize: `${randomSize * 1.8}rem`,
-            }}
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{
-              scale: [1, 1.15, 1],
-              rotate: [0, 8, -8, 0],
-              y: [0, -5, 0],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 2,
-              repeat: Infinity,
-              delay: randomDelay,
-              ease: "easeInOut",
-            }}
-          >
-            {emoji}
-            {/* Glow effect behind flower */}
-            <motion.div
-              animate={{
-                opacity: [0.3, 0.6, 0.3],
-                scale: [0.8, 1.2, 0.8],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="absolute inset-0 bg-pink-300/30 rounded-full blur-md -z-10"
-            />
-          </motion.div>
-        );
-      })}
-
-
-      {/* 🐢 Enhanced cute island animals */}
-      <motion.div
-        className="absolute bottom-40 left-1/4 text-3xl z-10 filter drop-shadow-lg"
-        animate={{ 
-          x: [0, 40, 0],
-          rotate: [0, 15, 0],
-          scale: [1, 1.1, 1]
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-      >
-        🐢
-      </motion.div>
+      
 
       <motion.div
         className="absolute bottom-44 right-1/3 text-2xl z-10 filter drop-shadow-lg"
@@ -356,17 +288,6 @@ export default function IslandMap() {
         transition={{ duration: 2.5, repeat: Infinity }}
       >
         🦜
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-48 left-1/2 text-2xl z-10 filter drop-shadow-lg"
-        animate={{ 
-          x: [0, -25, 0],
-          scale: [1, 1.15, 1]
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      >
-        🐿️
       </motion.div>
 
       <motion.div
@@ -406,94 +327,7 @@ export default function IslandMap() {
         </motion.div>
       ))}
 
-      {/* 🦩 Enhanced flamingos */}
-      <motion.div
-        className="absolute bottom-28 left-1/3 text-3xl z-10 filter drop-shadow-lg"
-        animate={{ 
-          y: [0, -12, 0],
-          rotate: [0, -8, 0],
-          scale: [1, 1.05, 1]
-        }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      >
-        🦩
-      </motion.div>
-
-      {/* 🐚 Enhanced seashells on beach */}
-      {[
-        { bottom: "18%", left: "28%", rotate: 15 },
-        { bottom: "20%", left: "35%", rotate: -20 },
-        { bottom: "19%", right: "30%", rotate: 25 },
-        { bottom: "21%", right: "38%", rotate: -15 },
-      ].map((shell, i) => (
-        <motion.div
-          key={`shell-${i}`}
-          className="absolute text-2xl z-10 filter drop-shadow-lg"
-          style={{ 
-            bottom: shell.bottom,
-            left: shell.left,
-            right: shell.right,
-          }}
-          initial={{ rotate: shell.rotate }}
-          animate={{ 
-            rotate: [shell.rotate, shell.rotate + 10, shell.rotate - 10, shell.rotate],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 6, repeat: Infinity, delay: i * 0.4 }}
-        >
-          <span style={{ 
-            color: ['#FFB6D9', '#FF69B4', '#FFA500', '#FFD93D'][i % 4]
-          }}>
-            🐚
-          </span>
-        </motion.div>
-      ))}
-      {/* 🌴 Enhanced tropical palm forest with depth */}
-      {Array.from({ length: 25 }).map((_, i) => {
-        const randomLeft = 12 + (i * 3.5); // Better distribution
-        const randomBottom = 18 + Math.random() * 35;
-        const randomSize = 1.2 + Math.random() * 1.8;
-        const randomDelay = i * 0.2;
-        const depth = i % 3; // Create layers for depth effect
-
-        return (
-          <motion.div
-            key={`palm-${i}`}
-            className="absolute z-10"
-            style={{
-              left: `${randomLeft}%`,
-              bottom: `${randomBottom}%`,
-              opacity: 1 - (depth * 0.1), // Farther palms are slightly faded
-            }}
-            initial={{ scale: 0, rotate: -45 }}
-            animate={{ 
-              scale: randomSize,
-              rotate: [0, 4, -4, 0],
-              y: [0, -3, 0]
-            }}
-            transition={{ 
-              duration: 6 + depth,
-              repeat: Infinity,
-              delay: randomDelay,
-              ease: "easeInOut"
-            }}
-          >
-            <div className={`filter drop-shadow-[0_5px_8px_rgba(0,0,0,0.4)]`}
-                 style={{ fontSize: `${2 + randomSize * 0.5}rem` }}>
-              🌴
-            </div>
-            {/* Shadow under palm */}
-            <motion.div
-              animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-2 
-                         bg-black/20 rounded-full blur-sm"
-            />
-          </motion.div>
-        );
-      })}
-
-
+      
       {/* 🦀 Enhanced walking crab */}
       <motion.div
         className="absolute bottom-24 right-24 text-3xl z-10 filter drop-shadow-lg"

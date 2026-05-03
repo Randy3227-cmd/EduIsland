@@ -65,7 +65,7 @@ INSERT INTO niveaux (matiere_id, level_number, type_id, xp_reward, content) VALU
       "hint": "Vêtement pour ne pas avoir froid"
     },
     {
-      "position": 120,
+      "position": 30,
       "correctAnswer": "trottoir",
       "acceptedAnswers": ["trottoir", "chemin"],
       "hint": "Endroit où marchent les piétons"

@@ -37,6 +37,7 @@ CREATE TABLE niveaux (
     id SERIAL PRIMARY KEY,
     matiere_id INTEGER REFERENCES matieres(id) ON DELETE CASCADE,
     level_number INTEGER NOT NULL,
+    type_id INTEGER,
     xp_reward INTEGER DEFAULT 10, -- XP gagné pour terminer le niveau
     content JSONB DEFAULT '{}'    -- Contenu du niveau (quiz, texte, images)
 );
@@ -57,6 +58,47 @@ CREATE TABLE niveau_types (
     name VARCHAR(50) NOT NULL,  -- nom du type, ex: "qcm", "carte_remplir"
     description TEXT             -- optionnel, pour expliquer ce type
 );
+create POLICY "Allow public access to users"
+ON users
+FOR SELECT
+USING (true);
+
+-- Policies de sécurit
+CREATE POLICY "Allow public access to villes"
+ON villes
+FOR SELECT
+USING (true);
+
+CREATE POLICY "Allow public access to matieres"
+ON matieres
+FOR SELECT
+USING (true);
+
+CREATE POLICY "Allow public access to niveaux"
+ON niveaux
+FOR SELECT
+USING (true);
+
+CREATE POLICY "Allow public access to scores"
+ON scores
+FOR SELECT
+USING (true);
+
+CREATE POLICY "Allow public write to scores"
+ON scores
+FOR INSERT
+WITH CHECK (true);
+
+CREATE POLICY "Allow public update to scores"
+ON scores
+FOR UPDATE
+WITH CHECK (true);
+
+CREATE POLICY "Allow public access to niveau_types"
+ON niveau_types
+FOR SELECT
+USING (true);
+
 -- -------------------------------
 -- 6️⃣ Exemples d'insertion de données
 -- -------------------------------
@@ -66,39 +108,39 @@ INSERT INTO villes (name, xp_required) VALUES
 ('Île des Mots Doux', 0),
 ('Baie des Savants', 50),
 ('Cité des Savoirs', 125),
-('Volcan de la Connaissance', 250),
+('Volcan de la Connaissance', 250);
 
 -- Matières pour Île des Mots Doux
 INSERT INTO matieres (ville_id, name) VALUES
-(4, 'Orthographe'),
-(4, 'Nombre'),
-(4, 'Vocabulaire');
+(9, 'Orthographe'),
+(9, 'Nombre'),
+(9, 'Vocabulaire');
 
 -- Matières pour Baie des Savants
 INSERT INTO matieres (ville_id, name) VALUES
-(5, 'Grammaire'),
-(5, 'Géométrie'),
-(5, 'Science de la vie');
+(10, 'Grammaire'),
+(10, 'Géométrie'),
+(10, 'Science de la vie');
 
 -- Matières pour Cité des Savoirs
 INSERT INTO matieres (ville_id, name) VALUES
-(6, 'Histoire'),
-(6, 'Géographie'),
-(6, 'Science de la terre');
+(11, 'Histoire'),
+(11, 'Géographie'),
+(11, 'Science de la terre');
 
 -- Matières pour Volcan de la Connaissance
 INSERT INTO matieres (ville_id, name) VALUES
-(7, 'Physique'),
-(7, 'Chimie'),
-(7, 'Problème');
+(12, 'Physique'),
+(12, 'Chimie'),
+(12, 'Problème');
 
 INSERT INTO villes (name, xp_required) VALUES
 ('Sunny English Bay', 0);
 INSERT INTO matieres (ville_id, name) VALUES
-(8, 'Anglais');
+(13, 'Anglais');
 
 
 -- Exemples de niveaux pour Orthographe (matiere_id = 1)
 INSERT INTO niveaux (matiere_id, level_number, xp_reward, content) VALUES
-(1, 1, 10, '{"questions":[{"q":"Mot correct","options":["a","b"],"answer":"a"}]}'),
+(1, 1, 10, '{"questions":[{"q":"Mot correct","options":["a","b"],"answer":"a"}]}')
 (1, 2, 10, '{"questions":[{"q":"Complète la phrase","options":["a","b"],"answer":"b"}]}');

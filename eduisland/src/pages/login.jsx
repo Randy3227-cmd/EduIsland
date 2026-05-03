@@ -23,6 +23,9 @@ export default function Login() {
         .eq("password", password)
         .single();
 
+        console.log(email)
+        console.log(password)
+        console.log(data)
       if (error || !data) {
         setError("Email ou mot de passe incorrect");
         return;

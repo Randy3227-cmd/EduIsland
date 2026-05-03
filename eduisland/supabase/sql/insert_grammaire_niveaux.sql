@@ -47,7 +47,7 @@ INSERT INTO niveaux (matiere_id, level_number, type_id, xp_reward, content) VALU
   "text": "Les enfants ___ dans le parc. Ils ___ très contents. Marie ___ un ballon rouge et Paul ___ à la balançoire. Leurs parents ___ sur un banc.",
   "blanks": [
     {
-      "position": 13,
+      "position": 4,
       "correctAnswer": "jouent",
       "acceptedAnswers": ["jouent"],
       "hint": "Verbe jouer au présent, 3e personne du pluriel (ils)"

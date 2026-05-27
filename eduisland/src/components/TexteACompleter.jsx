@@ -79,9 +79,9 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
 
       console.log('Texte - Résultat sauvegarde:', result);
 
-      if (result.success && onComplete) {
+      if (onComplete) {
         console.log('Texte - Appel de onComplete');
-        onComplete(score, totalBlanks, result.xpEarned);
+        onComplete(score, totalBlanks, result.xpEarned || 0);
       }
     } catch (error) {
       console.error('Erreur lors de la complétion du niveau:', error);

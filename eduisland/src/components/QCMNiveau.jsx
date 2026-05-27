@@ -80,9 +80,9 @@ const QCMNiveau = ({ niveauId, userId, onComplete }) => {
 
       console.log('QCM - Résultat sauvegarde:', result);
 
-      if (result.success && onComplete) {
+      if (onComplete) {
         console.log('QCM - Appel de onComplete');
-        onComplete(finalScore, totalQuestions, result.xpEarned);
+        onComplete(finalScore, totalQuestions, result.xpEarned || 0);
       }
     } catch (error) {
       console.error('Erreur lors de la complétion du niveau:', error);

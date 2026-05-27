@@ -15,7 +15,8 @@ export const saveNiveauCompletion = async (userId, niveauId, score, maxScore, xp
   try {
     // Calculer l'XP en fonction du pourcentage de réussite
     const percentage = (score / maxScore) * 100;
-    const xpEarned = Math.round((percentage / 100) * xpReward);
+    const safeXpReward = xpReward || 0;
+    const xpEarned = Math.round((percentage / 100) * safeXpReward);
 
     console.log('saveNiveauCompletion - XP calculé:', { percentage, xpEarned });
 

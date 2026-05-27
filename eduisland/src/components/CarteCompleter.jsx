@@ -113,9 +113,9 @@ const CarteCompleter = ({ niveauId, userId, onComplete }) => {
 
       console.log('Carte - Résultat sauvegarde:', result);
 
-      if (result.success && onComplete) {
+      if (onComplete) {
         console.log('Carte - Appel de onComplete');
-        onComplete(finalScore, totalZones, result.xpEarned);
+        onComplete(finalScore, totalZones, result.xpEarned || 0);
       }
     } catch (error) {
       console.error('Erreur lors de la complétion du niveau:', error);

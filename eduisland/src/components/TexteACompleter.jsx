@@ -100,62 +100,55 @@ const TexteACompleter = ({ niveauId, userId, onComplete }) => {
 
   const renderTextWithBlanks = () => {
     const { text, blanks } = niveauData.content;
-    let parts = [];
-    let lastIndex = 0;
-
-    blanks.forEach((blank, index) => {
-      // Ajouter le texte avant le blanc
-      parts.push(
-        <span key={`text-${index}`}>
-          {text.substring(lastIndex, blank.position)}
-        </span>
-      );
-
-      // Ajouter l'input pour le blanc
-      const correct = isAnswerCorrect(index);
-      let inputClass = "mx-2 px-3 py-1 border-b-2 outline-none transition-all duration-200 ";
+    
+    // Split the text by any sequences of 2 or more underscores (e.g., __, ___, ____)
+    const segments = text.split(/_{2,}/);
+    const parts = [];
+    
+    segments.forEach((segment, index) => {
+      // Add the text segment
+      parts.push(<span key={`text-${index}`}>{segment}</span>);
       
-      if (submitted) {
-        if (correct) {
-          inputClass += "border-green-500 bg-green-50";
+      // If there is a blank for this position, add the input
+      if (index < blanks.length) {
+        const blank = blanks[index];
+        const correct = isAnswerCorrect(index);
+        
+        let inputClass = "mx-1 px-2 py-0.5 border-b-2 outline-none transition-all duration-200 text-center rounded-t-md font-medium ";
+        
+        if (submitted) {
+          if (correct) {
+            inputClass += "border-green-500 bg-green-50 text-green-800 shadow-sm shadow-green-100";
+          } else {
+            inputClass += "border-red-400 bg-red-50 text-red-800 line-through decoration-red-400 decoration-2";
+          }
         } else {
-          inputClass += "border-red-500 bg-red-50";
+          inputClass += "border-purple-300 focus:border-purple-600 focus:bg-purple-50 hover:border-purple-400";
         }
-      } else {
-        inputClass += "border-blue-400 focus:border-blue-600";
+        
+        parts.push(
+          <span key={`blank-${index}`} className="inline-flex items-center gap-1.5 align-baseline">
+            <input
+              type="text"
+              value={userAnswers[index] || ''}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+              disabled={submitted}
+              className={inputClass}
+              style={{ 
+                width: `${Math.max((blank.correctAnswer || '').length * 12 + 10, 90)}px`,
+              }}
+              placeholder={blank.hint || '...'}
+            />
+            {submitted && !correct && (
+              <span className="inline-flex items-center text-xs bg-green-500 text-white px-2 py-0.5 rounded-full font-bold shadow-sm animate-bounce whitespace-nowrap">
+                ✓ {blank.correctAnswer}
+              </span>
+            )}
+          </span>
+        );
       }
-
-      parts.push(
-        <span key={`blank-${index}`} className="inline-block relative">
-          <input
-            type="text"
-            value={userAnswers[index]}
-            onChange={(e) => handleInputChange(index, e.target.value)}
-            disabled={submitted}
-            className={inputClass}
-            style={{ width: `${Math.max(blank.correctAnswer.length * 12, 100)}px` }}
-            placeholder={blank.hint || '...'}
-          />
-          {submitted && !correct && (
-            <div className="absolute top-full left-0 mt-1 text-xs text-green-600 whitespace-nowrap">
-              ✓ {blank.correctAnswer}
-            </div>
-          )}
-        </span>
-      );
-
-      lastIndex = blank.position + blank.correctAnswer.length;
     });
-
-    // Ajouter le texte restant
-    if (lastIndex < text.length) {
-      parts.push(
-        <span key="text-end">
-          {text.substring(lastIndex)}
-        </span>
-      );
-    }
-
+    
     return parts;
   };
 
